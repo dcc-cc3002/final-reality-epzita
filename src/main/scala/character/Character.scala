@@ -8,3 +8,6 @@ trait Character {
   val weight: Int
 }
 
+//crear player y enemies como clase abstracta y que luego las clases extiendan la clase
+//abstracta? como instanciar los enemigos entonces?
+
