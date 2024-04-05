@@ -8,6 +8,10 @@ trait Weapon {
   val damage: Int
   val defense: Int
   val weight: Int
-  val owner: Character
+  var owner: Character
+
+  def getOwner(w:Weapon): Character
+  def setOwner(c: Character): Unit
+
 
 }

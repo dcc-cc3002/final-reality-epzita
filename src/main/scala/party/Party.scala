@@ -11,7 +11,11 @@ class Party {
 
   def isDefeated: Boolean = {
     //for character in party if character.hp == 0 return true (comparar y verificar todos?)
-    false
+    var total_hp: Int = 0;
+    for(character <- currentParty){
+      total_hp = total_hp + character.hp
+    }
+    total_hp == 0;
   }
 
 
