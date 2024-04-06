@@ -3,7 +3,6 @@ import character.Character
 import scala.collection.mutable.ArrayBuffer
 
 class Party {
-
   val currentParty: ArrayBuffer[Character] = new ArrayBuffer[Character]
   def addCharacter(character: Character): Unit = {
     currentParty.addOne(character)

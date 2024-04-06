@@ -1,10 +1,11 @@
-package exceptions
+package exceptions.character
 
 import character.specializations.Ninja
 import munit.FunSuite
 
 class NinjaTest extends FunSuite{
   var ninja: Ninja = _
+
 
   override def beforeEach(context: BeforeEach): Unit ={
     ninja = new Ninja("Naruto", 20, 15, 70)

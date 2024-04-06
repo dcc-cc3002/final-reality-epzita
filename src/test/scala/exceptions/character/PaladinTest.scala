@@ -1,4 +1,4 @@
-package exceptions
+package exceptions.character
 
 import character.specializations.Paladin
 import munit.FunSuite

@@ -1,13 +1,14 @@
-package exceptions
+package exceptions.character
 
-import character.specializations.BlackMage
+import character.specializations.Warrior
 import munit.FunSuite
 
+
 class WarriorTest extends FunSuite{
-  var warrior: BlackMage = _
+  var warrior: Warrior = _
 
   override def beforeEach(context: BeforeEach): Unit ={
-    warrior = new BlackMage("Pepsita", 35, 8, 62)
+    warrior = new Warrior("Pepsita", 35, 8, 62)
   }
   test("Checking correct asignment of enemy stats") {
     assertEquals(warrior.name, "Pepsita")

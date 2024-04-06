@@ -11,7 +11,4 @@ class Paladin (val name: String,
     w.owner = this
   }
 
-  def getHp: Int ={
-    this.hp
-  }
 }
