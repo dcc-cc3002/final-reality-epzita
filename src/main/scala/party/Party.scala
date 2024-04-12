@@ -1,18 +1,25 @@
 package party
-import character.Character
+import character.Person
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Party class, creates an array containing Characters
+ */
 class Party {
-  val currentParty: ArrayBuffer[Character] = new ArrayBuffer[Character]
-  def addCharacter(character: Character): Unit = {
-    currentParty.addOne(character)
+  val currentParty: ArrayBuffer[Person] = new ArrayBuffer[Person]
+  def addMember(member: Person): Unit = {
+    currentParty.addOne(member)
   }
 
+  /**
+   *
+   * @return state of the party
+   */
   def isDefeated: Boolean = {
     //for character in party if character.hp == 0 return true (comparar y verificar todos?)
     var total_hp: Int = 0;
-    for(character <- currentParty){
-      total_hp = total_hp + character.hp
+    for(partyMember <- currentParty){
+      total_hp = total_hp + partyMember.hp
     }
     total_hp == 0;
   }

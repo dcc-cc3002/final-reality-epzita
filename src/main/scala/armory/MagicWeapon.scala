@@ -1,12 +1,17 @@
 package armory
 
-import character.MagicCharacter
+import character.{Character, MagicCharacter}
 
+/**
+ * magic weapon, extends from weapon and adds magic damage parameter
+ */
 abstract class MagicWeapon extends Weapon {
   val name: String
-  val damage: Int
-  val magicDamage: Int
+  var damage: Int
+  var magicDamage: Int
   val defense: Int
   val weight: Int
-  var owner: MagicCharacter
+
+  def enhance(): Unit
+
 }

@@ -1,12 +1,9 @@
-import character.specializations.BlackMage
-import character.specializations.WhiteMage
-import character.specializations.Paladin
-import character.specializations.Ninja
-import character.specializations.Warrior
-import party.Party
-import munit.FunSuite
+package exceptions.partyExceptions
 
-import scala.collection.mutable.ArrayBuffer
+import character.specializations._
+import munit.FunSuite
+import party.Party
+
 
 class PartyTest extends FunSuite {
   var party: Party = _
@@ -21,24 +18,31 @@ class PartyTest extends FunSuite {
     blackMage = new BlackMage("Saruman", 20, 10, 50, 95)
     whiteMage = new WhiteMage("Gandalf", 15, 5, 60, 100)
     paladin = new Paladin("Belfor", 30, 10, 75)
-    ninja = new Ninja("Naruto", 20, 15, 70)
-    warrior = new Warrior("Pepsita", 35, 8, 62)
+    ninja = new Ninja("Naruto", 0, 15, 70)
+    warrior = new Warrior("Pepsita", 0, 8, 62)
     party = new Party()
 
   }
 
-  test("Testing addCharacter method") {
-    party.addCharacter(paladin)
-    party.addCharacter(whiteMage)
+  test("Testing addMember method") {
+    party.addMember(paladin)
+    party.addMember(whiteMage)
 
     assertEquals(party.currentParty(0), paladin)
     assertEquals(party.currentParty(1), whiteMage)
   }
 
-  test("Testing isDefeated method"){
-    party.addCharacter(paladin)
-    party.addCharacter(whiteMage)
+  test("Testing isDefeated method when false"){
+    party.addMember(paladin)
+    party.addMember(whiteMage)
 
     assertEquals(party.isDefeated, false)
+  }
+
+  test("Testing isDefeated method when true"){
+    party.addMember(ninja)
+    party.addMember(warrior)
+
+    assertEquals(party.isDefeated, true)
   }
 }

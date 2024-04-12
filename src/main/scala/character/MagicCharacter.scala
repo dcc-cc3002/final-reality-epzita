@@ -1,6 +1,12 @@
 package character
 
-import armory.Weapon
+import armory.{MagicWeapon, Weapon}
+
+/**
+ * Abstracts class which extends from Character, built to have a better
+ * design when it comes to implementing Mage characters
+ * Adds the mp (mana points) attribute
+ */
 abstract class MagicCharacter extends Character {
   val name: String
   var hp: Int
@@ -8,6 +14,8 @@ abstract class MagicCharacter extends Character {
   val weight: Int
   var mp: Int
 
-  def equipWeapon(w: Weapon): Unit
+  def equipWeapon(): Unit
+
+  def unequipWeapon(): Unit
 
 }

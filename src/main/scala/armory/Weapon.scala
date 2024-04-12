@@ -2,16 +2,13 @@ package armory
 
 import character.Character
 
+/**
+ * weapon interface, helps create different kinds of weapon classes and eventually
+ * every weapon
+ */
 trait Weapon {
-  //puede cambiar el ataque?
   val name: String
-  val damage: Int
+  var damage: Int
   val defense: Int
   val weight: Int
-  var owner: Character
-
-  def getOwner(w:Weapon): Character
-  def setOwner(c: Character): Unit
-
-
 }

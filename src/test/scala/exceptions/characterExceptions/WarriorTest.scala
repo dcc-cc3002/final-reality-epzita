@@ -1,4 +1,4 @@
-package exceptions.character
+package exceptions.characterExceptions
 
 import character.specializations.Warrior
 import munit.FunSuite
@@ -10,7 +10,7 @@ class WarriorTest extends FunSuite{
   override def beforeEach(context: BeforeEach): Unit ={
     warrior = new Warrior("Pepsita", 35, 8, 62)
   }
-  test("Checking correct asignment of enemy stats") {
+  test("Checking correct asignment of character stats") {
     assertEquals(warrior.name, "Pepsita")
   }
 
@@ -18,12 +18,21 @@ class WarriorTest extends FunSuite{
     assertEquals(warrior.hp, 35)
   }
 
-  test("Checking hp") {
+  test("Checking defense") {
     assertEquals(warrior.defense, 8)
   }
 
-  test("Checking hp") {
+  test("Checking weight") {
     assertEquals(warrior.weight, 62)
+  }
+  test("Testing temporary equipWeapon method") {
+    warrior.equipWeapon()
+    assertEquals(warrior.hasWeapon(), true)
+  }
+
+  test("Testing temporary unequipWeapon method") {
+    warrior.unequipWeapon()
+    assertEquals(warrior.hasWeapon(), false)
   }
 
 }

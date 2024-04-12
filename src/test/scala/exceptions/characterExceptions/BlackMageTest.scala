@@ -1,4 +1,4 @@
-package exceptions.character
+package exceptions.characterExceptions
 
 import character.specializations.BlackMage
 import munit.FunSuite
@@ -10,7 +10,7 @@ class BlackMageTest extends FunSuite{
   override def beforeEach(context: BeforeEach): Unit ={
     blackMage = new BlackMage("Saruman", 20, 10, 50, 95)
   }
-  test("Checking correct asignment of enemy stats") {
+  test("Checking correct asignment of character stats") {
     assertEquals(blackMage.name, "Saruman")
   }
 
@@ -18,16 +18,25 @@ class BlackMageTest extends FunSuite{
     assertEquals(blackMage.hp, 20)
   }
 
-  test("Checking hp") {
+  test("Checking defense") {
     assertEquals(blackMage.defense, 10)
   }
 
-  test("Checking hp") {
+  test("Checking weight") {
     assertEquals(blackMage.weight, 50)
   }
 
-  test("Checking hp") {
+  test("Checking mp") {
     assertEquals(blackMage.mp, 95)
+  }
+  test("Testing temporary equipWeapon method") {
+    blackMage.equipWeapon()
+    assertEquals(blackMage.hasWeapon(), true)
+  }
+
+  test("Testing temporary unequipWeapon method") {
+    blackMage.unequipWeapon()
+    assertEquals(blackMage.hasWeapon(), false)
   }
 
 
