@@ -9,4 +9,7 @@ trait Person {
   var defense: Int
   val weight: Int
 
+  var maxActionBar: Int
+  var actionBar: Int
+
 }

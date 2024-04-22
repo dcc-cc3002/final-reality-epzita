@@ -13,6 +13,9 @@ abstract class Character extends Person {
   var defense: Int
   val weight: Int
 
+  var maxActionBar = 0
+  var actionBar = 0
+
   def equipWeapon(): Unit
 
   def unequipWeapon(): Unit

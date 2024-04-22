@@ -13,6 +13,9 @@ class Enemy(val name: String, var hp: Int,
   var defense: Int,
   val weight: Int)  extends Person{
 
+  var maxActionBar = 0
+  var actionBar = 0
+
   /**
    * this method has been implemented just for the Enemy class to be instanced and tested
    */
