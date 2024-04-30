@@ -11,6 +11,29 @@ abstract class PhysicalWeapon extends Weapon{
   val defense: Int
   val weight: Int
 
-  def sharp(): Unit
+  /**
+   * damage getter
+   *
+   * @return damage
+   */
+  def getDamage(): Int = {
+    this.damage
+  }
+
+  /**
+   * damage setter
+   *
+   * @param num increases current damage by num
+   */
+  def setDamage(num: Int): Unit = {
+    this.damage = this.damage + num
+  }
+
+  /**
+   * method created to test this kind of weapon, increases damage by 2
+   */
+  def sharp(): Unit = {
+    damage += 2
+  }
 
 }
