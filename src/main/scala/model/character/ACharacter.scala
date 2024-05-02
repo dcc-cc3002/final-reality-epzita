@@ -14,9 +14,9 @@ abstract class ACharacter extends Person {
   var defense: Int
   val weight: Int
 
-  var weapon: Weapon = _
+  var weapon: Option[Weapon] = None
 
-  var maxActionBar = 0
+  var maxActionBar: Int = weight
   var actionBar = 0
 
   /**
@@ -24,15 +24,15 @@ abstract class ACharacter extends Person {
    */
 
   def equipWeapon(weapon: Weapon): Unit = {
-    if (this.weapon == null) {
-      this.weapon = weapon
-
+    if (this.weapon.isEmpty) {
+      this.weapon = Some(weapon)
+      weapon.setOwner(this)
+      maxActionBar += weapon.weight
     }
   }
 
   def unequipWeapon(weapon: Weapon): Unit = {
-    this.weapon = null
-
+    this.weapon = None
   }
 
   var hasweapon = false

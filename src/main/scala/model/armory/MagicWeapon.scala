@@ -38,12 +38,12 @@ abstract class MagicWeapon extends Weapon {
     setMagicDamage(2)
   }
 
-  def setOwner(character: Option[Person]): Unit = {
+  def setOwner(character: Person): Unit = {
     if (owner.isEmpty) {
-      this.owner = character
-
+      this.owner = Some(character)
     }
   }
+
   def leaveOwner(): Unit = {
     this.owner = None
   }

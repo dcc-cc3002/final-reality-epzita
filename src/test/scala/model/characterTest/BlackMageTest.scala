@@ -43,18 +43,28 @@ class BlackMageTest extends FunSuite{
   }
 
   test("Testing new version of equipWeapon method"){
-    assertEquals(blackMage.weapon, null)
+    assertEquals(blackMage.weapon, None)
   }
 
   test("same as above"){
     blackMage.equipWeapon(staff)
-    assertEquals(blackMage.weapon, staff)
+    assertEquals(blackMage.weapon, Some(staff))
   }
 
   test("Testing unequipWeapon method"){
     blackMage.equipWeapon(staff)
     blackMage.unequipWeapon(staff)
-    assertEquals(blackMage.weapon, null)
+    assertEquals(blackMage.weapon, None)
+  }
+
+  test("Testing maxActionBar values"){
+    assertEquals(blackMage.maxActionBar, blackMage.weight)
+  }
+
+  test("Testing maxActionBar change when equiping a weapon"){
+    blackMage.equipWeapon(staff)
+    var expected: Int = blackMage.weight + staff.weight
+    assertEquals(blackMage.maxActionBar, expected)
   }
 
 

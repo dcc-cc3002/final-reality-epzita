@@ -12,6 +12,6 @@ trait Weapon {
   val defense: Int
   val weight: Int
 
-  def setOwner(character: Option[Person]): Unit
+  def setOwner(character: Person): Unit
   def leaveOwner(): Unit
 }
