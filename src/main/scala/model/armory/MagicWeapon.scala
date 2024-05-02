@@ -1,6 +1,6 @@
 package model.armory
 
-import model.character.{ACharacter, AMagicCharacter, Person}
+import model.character.{ACharacter, AMagicCharacter, Character}
 
 /**
  * magic weapon, extends from weapon and adds magic damage parameter
@@ -12,7 +12,7 @@ abstract class MagicWeapon extends Weapon {
   val defense: Int
   val weight: Int
 
-  var owner: Option[Person] = None
+  var owner: Option[Character] = None
 
   /**
    * magic damage getter
@@ -38,7 +38,7 @@ abstract class MagicWeapon extends Weapon {
     setMagicDamage(2)
   }
 
-  def setOwner(character: Person): Unit = {
+  def setOwner(character: Character): Unit = {
     if (owner.isEmpty) {
       this.owner = Some(character)
     }

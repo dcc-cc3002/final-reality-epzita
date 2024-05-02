@@ -1,6 +1,6 @@
 package model.character
 
-abstract class AEnemy extends Person {
+abstract class AEnemy extends Character {
   /** Enemy's stats */
   val name: String
   var hp: Int

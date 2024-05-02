@@ -33,7 +33,7 @@ class BlackMageTest extends FunSuite{
     assertEquals(blackMage.mp, 95)
   }
   test("Testing temporary equipWeapon method") {
-    blackMage.equipWeapon()
+    blackMage.equipWeapon(staff)
     assertEquals(blackMage.hasWeapon, true)
   }
 
@@ -53,7 +53,7 @@ class BlackMageTest extends FunSuite{
 
   test("Testing unequipWeapon method"){
     blackMage.equipWeapon(staff)
-    blackMage.unequipWeapon(staff)
+    blackMage.unequipWeapon()
     assertEquals(blackMage.weapon, None)
   }
 

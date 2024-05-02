@@ -1,13 +1,15 @@
 package model.characterTest
 
+import model.armory.Sword
 import model.character.specializations.Paladin
 import munit.FunSuite
 
 class PaladinTest extends FunSuite{
   var paladin: Paladin = _
-
+  var sword: Sword = _
   override def beforeEach(context: BeforeEach): Unit ={
     paladin = new Paladin("Tyrion", 30, 10, 75)
+    sword = new Sword("Excalibur", 10, 10,10)
 
   }
   test("Checking correct asignment of character stats") {
@@ -27,7 +29,7 @@ class PaladinTest extends FunSuite{
   }
 
   test("Testing temporary equipWeapon method"){
-    paladin.equipWeapon()
+    paladin.equipWeapon(sword)
     assertEquals(paladin.hasWeapon, true)
   }
 

@@ -3,7 +3,7 @@ package model.character
 /**
  * main interface to create characters and enemies
  */
-trait Person {
+trait Character {
   val name: String
   var hp: Int
   var defense: Int

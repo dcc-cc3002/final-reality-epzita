@@ -1,7 +1,7 @@
 package model.character.specializations
 
 import model.armory.PhysicalWeapon
-import model.character.ACharacter
+import model.character.{ACharacter, APhysicalCharacter}
 
 /**
  *
@@ -14,7 +14,7 @@ import model.character.ACharacter
 class Warrior (val name: String,
                var hp: Int,
                var defense: Int,
-               val weight: Int) extends ACharacter{
+               val weight: Int) extends APhysicalCharacter{
 
 
 }

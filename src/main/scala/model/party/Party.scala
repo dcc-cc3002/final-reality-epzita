@@ -1,14 +1,14 @@
 package model.party
 
-import model.character.Person
+import model.character.Character
 import scala.collection.mutable.ArrayBuffer
 
 /**
  * Party class, creates an array containing Characters
  */
 class Party {
-  val currentParty: ArrayBuffer[Person] = new ArrayBuffer[Person]
-  def addMember(member: Person): Unit = {
+  val currentParty: ArrayBuffer[Character] = new ArrayBuffer[Character]
+  def addMember(member: Character): Unit = {
     currentParty.addOne(member)
   }
 

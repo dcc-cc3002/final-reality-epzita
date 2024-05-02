@@ -7,7 +7,7 @@ import model.armory.Weapon
  * for the rest of specializations, for example, a Warrior must be a
  * Character
  */
-abstract class ACharacter extends Person {
+abstract class ACharacter extends Character {
   /** character's stats */
   val name: String
   var hp: Int
@@ -18,6 +18,7 @@ abstract class ACharacter extends Person {
 
   var maxActionBar: Int = weight
   var actionBar = 0
+
 
   /**
    * variable switch that helps to determine if theres a weapon equipped or not
@@ -31,32 +32,15 @@ abstract class ACharacter extends Person {
     }
   }
 
-  def unequipWeapon(weapon: Weapon): Unit = {
-    this.weapon = None
-  }
-
-  var hasweapon = false
-
-  /**
-   * Equips a weapon triggering the hasweapon switch
-   */
-  def equipWeapon(): Unit = {
-    hasweapon = true
-
-  }
-
-  /**
-   * unequips a weapon triggering the hasweapon switch
-   */
   def unequipWeapon(): Unit = {
-    hasweapon = false
+    this.weapon = None
   }
 
   /**
    * @return boolean indicating if there is in fact a weapon equipped or not
    */
   def hasWeapon: Boolean = {
-    hasweapon
+     this.weapon.isDefined
   }
 }
 
