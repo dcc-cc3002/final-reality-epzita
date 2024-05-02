@@ -1,6 +1,6 @@
 package model.armory
 
-import model.character.ACharacter
+import model.character.Person
 
 /**
  * abstract class that helps create only physical type weapons
@@ -10,6 +10,8 @@ abstract class PhysicalWeapon extends Weapon{
   var damage: Int
   val defense: Int
   val weight: Int
+
+  var owner: Option[Person] = None
 
   /**
    * damage getter
@@ -34,6 +36,16 @@ abstract class PhysicalWeapon extends Weapon{
    */
   def sharp(): Unit = {
     damage += 2
+  }
+
+  def setOwner(character: Option[Person]): Unit = {
+    if (owner.isEmpty) {
+      this.owner = character
+
+    }
+  }
+  def leaveOwner(): Unit = {
+    this.owner = None
   }
 
 }

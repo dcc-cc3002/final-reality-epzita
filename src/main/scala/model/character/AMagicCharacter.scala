@@ -1,5 +1,7 @@
 package model.character
 
+import model.armory.Weapon
+
 
 /**
  * Abstracts class which extends from Character, built to have a better
@@ -13,12 +15,27 @@ abstract class AMagicCharacter extends Person {
   val weight: Int
   var mp: Int
 
+
+  var weapon: Weapon = _
+
   var maxActionBar = 0
   var actionBar = 0
 
   /**
    * variable switch that helps to determine if theres a weapon equipped or not
    */
+
+  def equipWeapon(weapon: Weapon): Unit = {
+    if(this.weapon == null) {
+      this.weapon = weapon
+
+    }
+  }
+
+  def unequipWeapon(weapon: Weapon): Unit = {
+    this.weapon = null
+  }
+
   var hasweapon = false
 
   /**
