@@ -8,9 +8,12 @@ abstract class AEnemy extends Character {
   var defense: Int
   val weight: Int
 
-  var maxActionBar = 0
+  var maxActionBar: Int = weight
   var actionBar = 0
 
+  override def attack(character: Character): Unit = {
+    character.hp -= this.attack - character.defense
+  }
   /**
    * this method has been implemented just for the Enemy class to be instanced and tested
    */

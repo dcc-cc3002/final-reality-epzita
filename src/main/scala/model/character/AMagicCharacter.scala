@@ -4,7 +4,7 @@ import model.armory.Weapon
 
 
 /**
- * Abstracts class which extends from Character, built to have a better
+ * Abstracts class which extends from ACharacter, built to have a better
  * design when it comes to implementing Mage characters
  * Adds the mp (mana points) attribute
  */

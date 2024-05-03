@@ -12,4 +12,6 @@ trait Character {
   var maxActionBar: Int
   var actionBar: Int
 
+  def attack(character: Character): Unit
+
 }

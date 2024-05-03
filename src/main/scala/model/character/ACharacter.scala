@@ -19,10 +19,17 @@ abstract class ACharacter extends Character {
   var maxActionBar: Int = weight
   var actionBar = 0
 
-
-  /**
-   * variable switch that helps to determine if theres a weapon equipped or not
-   */
+  override def attack(character: Character): Unit = {
+    weapon match {
+      case Some(weapon) =>
+        val damage = weapon.damage - character.defense
+        if (damage > 0) {
+          character.hp -= damage
+        }
+      case None =>
+        println(s"${this.name} no tiene un arma equipada.")
+    }
+  }
 
   def equipWeapon(weapon: Weapon): Unit = {
     if (this.weapon.isEmpty) {
