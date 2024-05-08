@@ -26,6 +26,9 @@ abstract class ACharacter extends Character {
         if (damage > 0) {
           character.hp -= damage
         }
+        else {
+          character.hp = character.hp
+        }
       case None =>
         println(s"${this.name} no tiene un arma equipada.")
     }
