@@ -19,6 +19,15 @@ abstract class ACharacter extends Character {
   var maxActionBar: Int = weight
   var actionBar = 0
 
+  override def setMaxActionBar(): Unit = {
+    weapon match {
+      case Some(weapon) =>
+        this.maxActionBar = this.weight + weapon.weight
+
+      case None =>
+        this.maxActionBar = this.weight
+    }
+  }
   override def attack(character: Character): Unit = {
     weapon match {
       case Some(weapon) =>
@@ -38,12 +47,13 @@ abstract class ACharacter extends Character {
     if (this.weapon.isEmpty) {
       this.weapon = Some(weapon)
       weapon.setOwner(this)
-      maxActionBar += weapon.weight
+      this.setMaxActionBar()
     }
   }
 
   def unequipWeapon(): Unit = {
     this.weapon = None
+    this.setMaxActionBar()
   }
 
   /**

@@ -7,34 +7,52 @@ import scala.collection.mutable.ArrayBuffer
 
 
 
-class TurnScheduler {
+class TurnScheduler(val fightingCharacters: ArrayBuffer[Character]) {
   /**
    * this lists contains the characters fighting
    * fightingCharacters contains all characters (and enemies) fighting
-   * when a character dies, he gets remove from this list
+   * when a character dies, he gets removed from this list
    * waitList contains every characters that hasn't been given a turn position yet
    * fightList contains every character in order for each turn
+   *
+   */
 
-  val fightingCharacters: ArrayBuffer[Character] = new ArrayBuffer[Character]
   val waitList: ArrayBuffer[Character] = new ArrayBuffer[Character]
   val fightList: ArrayBuffer[Character] = new ArrayBuffer[Character]
 
 
   def addNewCharacter(p: Character): Unit = {
-    fightingCharacters.addOne(p)
+    this.fightingCharacters.addOne(p)
   }
 
   def removeCharacter(p: Character): Unit = {
-    fightingCharacters -= p
+    val index = this.fightingCharacters.indexOf(p)
+    this.fightingCharacters.remove(index)
   }
 }
 
-def characterMaxActionBar(characters: ArrayBuffer[Character]): Unit = {
+
+def setCharacterMaxActionBar(characters: ArrayBuffer[Character]): Unit = {
   for (character <- characters){
-    character.maxActionBar = character.weight /** this has to be change if character is enemy or player */
-
+    character.setMaxActionBar()
   }
 }
+
+
+def resetCharacterActionBar(character: Character): Unit = {
+  character.actionBar = 0;
+}
+
+/**
+def updateCharactersActionBar(k: Int, characters: ArrayBuffer[Character]): Unit = {
+  for(character <- characters){
+    character.actionBar += k
+    if (character.actionBar >= character.maxActionBar){
+      fightList.addOne(character)
+    }
+  }
+}
+*/
 
 /**
  *
@@ -54,6 +72,4 @@ def turnPosition(characters: ArrayBuffer[Character], waitList: ArrayBuffer[Chara
       fightList += character
     }
   }
-
-*/
 }
