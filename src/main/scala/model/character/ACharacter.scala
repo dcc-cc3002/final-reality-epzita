@@ -28,6 +28,29 @@ abstract class ACharacter extends Character {
         this.maxActionBar = this.weight
     }
   }
+/**
+  override def setMaxActionBar(): Unit = {
+    if (weapon.isDefined) {
+      this.maxActionBar = this.weight + weapon.get.weight
+    }
+    else  {
+      this.maxActionBar = this.weight
+    }
+  }
+
+  override def attack(character: Character): Unit = {
+    if (weapon.isDefined) {
+      val damage = weapon.get.damage - character.defense
+      if (damage > 0) {
+        character.hp -= damage
+      } else {
+        character.hp = 0
+      }
+    } else {
+      println(s"${this.name} no tiene un arma equipada.")
+    }
+  }
+  */
   override def attack(character: Character): Unit = {
     weapon match {
       case Some(weapon) =>
