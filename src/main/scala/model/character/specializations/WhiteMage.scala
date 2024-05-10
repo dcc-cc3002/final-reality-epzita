@@ -17,5 +17,4 @@ class WhiteMage (val name: String,
                  var defense: Int,
                  val weight: Int,
                  var mp: Int) extends AMagicCharacter {
-
 }

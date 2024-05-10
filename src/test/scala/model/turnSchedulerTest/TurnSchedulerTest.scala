@@ -1,4 +1,4 @@
-package model
+package model.turnSchedulerTest
 
 import model.armory.Sword
 import model.character.Enemy
@@ -55,6 +55,40 @@ class TurnSchedulerTest extends FunSuite {
     assertEquals(warrior.maxActionBar, warriorExpected)
     assertEquals(dummy.maxActionBar, dummy.weight)
     assertEquals(enemy.maxActionBar, enemy.weight)
+  }
+
+  test("A turn scheduler can access its characters actionBar"){
+    turnScheduler.addNewCharacter(warrior)
+    //A character's default actionBar is set on 0
+    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 0)
+  }
+
+  test("A turn scheduler can increase its character's actionBar"){
+    turnScheduler.addNewCharacter(warrior)
+    turnScheduler.addNewCharacter(enemy)
+
+    turnScheduler.updateCharacterActionBar(5, turnScheduler.fightingCharacters)
+
+    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 5)
+    assertEquals(turnScheduler.fightingCharacters(1).actionBar, 5)
+
+    turnScheduler.updateCharacterActionBar(2, turnScheduler.fightingCharacters)
+
+    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 7)
+    assertEquals(turnScheduler.fightingCharacters(1).actionBar, 7)
+  }
+
+  test("A turn scheduler can reset its character's actionBar"){
+    turnScheduler.addNewCharacter(warrior)
+    turnScheduler.addNewCharacter(enemy)
+
+    //we set the character's action bar to be different than 0
+    turnScheduler.updateCharacterActionBar(5, turnScheduler.fightingCharacters)
+
+    turnScheduler.resetCharacterActionBar(turnScheduler.fightingCharacters)
+
+    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 0)
+    assertEquals(turnScheduler.fightingCharacters(1).actionBar, 0)
 
   }
 }

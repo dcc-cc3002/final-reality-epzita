@@ -36,9 +36,6 @@ abstract class ATurnScheduler extends ITurnScheduler {
   def updateCharacterActionBar(k: Int, characters: ArrayBuffer[Character]): Unit = {
     for (character <- characters) {
       character.actionBar += k
-      if (character.actionBar >= character.maxActionBar) {
-      }
     }
   }
-
 }
