@@ -17,10 +17,10 @@ class SwordTest extends FunSuite {
     assertEquals(sword.name, "Excalibur")
   }
   test("Checking correct asignment of weapon damage") {
-    assertEquals(sword.damage, 15)
+    assertEquals(sword.getDamage, 15)
   }
   test("Checking correct asignment of weapon defense") {
-    assertEquals(sword.defense, 10)
+    assertEquals(sword.getDefense, 10)
   }
   test("Checking correct asignment of weapon weight") {
     assertEquals(sword.weight, 5)
@@ -28,7 +28,7 @@ class SwordTest extends FunSuite {
 
   test("Checking Staff enhance method") {
     sword.sharp()
-    assertEquals(sword.getDamage(), 17)
+    assertEquals(sword.getDamage, 17)
   }
 
   test("Testing owner methods"){

@@ -54,7 +54,7 @@ abstract class ACharacter extends Character {
   override def attack(character: Character): Unit = {
     weapon match {
       case Some(weapon) =>
-        val damage = weapon.damage - character.defense
+        val damage = weapon.getDamage - character.defense
         if (damage > 0) {
           character.hp -= damage
         }

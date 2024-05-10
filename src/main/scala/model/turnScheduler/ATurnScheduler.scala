@@ -39,7 +39,7 @@ abstract class ATurnScheduler extends ITurnScheduler {
       waitList.addOne(character)
     }
   }
-  def cleanWaitList(): Unit = {
+  private def cleanWaitList(): Unit = {
     for(character <- fightList){
       val index = waitList.indexOf(character)
       if(index != -1){

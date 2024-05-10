@@ -4,7 +4,7 @@ abstract class AEnemy extends Character {
   /** Enemy's stats */
   val name: String
   var hp: Int
-  val attack: Int
+  var attack: Int
   var defense: Int
   val weight: Int
 

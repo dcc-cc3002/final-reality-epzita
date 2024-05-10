@@ -8,8 +8,8 @@ package model.armory
  * @param weight weight of the weapon, affects turn position during combat
  */
 class Sword(val name: String,
-            var damage: Int,
-            val defense: Int,
+            protected var damage: Int,
+            protected val defense: Int,
             val weight: Int) extends PhysicalWeapon {
 
 

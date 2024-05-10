@@ -18,20 +18,20 @@ class StaffTest extends FunSuite {
     assertEquals(staff.name, "Stick")
   }
   test("Checking correct asignment of weapon damage") {
-    assertEquals(staff.damage, 1)
+    assertEquals(staff.getDamage, 1)
   }
   test("Checking correct asignment of weapon magic damage") {
-    assertEquals(staff.magicDamage, 10)
+    assertEquals(staff.getMagicDamage, 10)
   }
   test("Checking correct asignment of weapon defense") {
-    assertEquals(staff.defense, 5)
+    assertEquals(staff.getDefense, 5)
   }
   test("Checking correct asignment of weapon weight") {
     assertEquals(staff.weight, 3)
   }
   test("Checking Staff enhance method") {
     staff.enhance()
-    assertEquals(staff.getMagicDamage(), 12)
+    assertEquals(staff.getMagicDamage, 12)
   }
   test("Testing setOwner method"){
     staff.setOwner(mage)

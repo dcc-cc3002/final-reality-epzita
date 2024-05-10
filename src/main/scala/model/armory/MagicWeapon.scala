@@ -7,18 +7,25 @@ import model.character.{ACharacter, AMagicCharacter, Character}
  */
 abstract class MagicWeapon extends Weapon {
   val name: String
-  var damage: Int
-  var magicDamage: Int
-  val defense: Int
+  protected var damage: Int
+  protected var magicDamage: Int
+  protected val defense: Int
   val weight: Int
 
   var owner: Option[Character] = None
+
+  override def getDamage: Int = {
+    this.damage
+  }
+  override def getDefense: Int = {
+    this.defense
+  }
 
   /**
    * magic damage getter
    * @return magic damage stat
    */
-  def getMagicDamage(): Int = {
+  def getMagicDamage: Int = {
     this.magicDamage
   }
 

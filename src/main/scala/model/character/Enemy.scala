@@ -9,7 +9,7 @@ package model.character
  * @param weight weight, helps determine position during combat turns
  */
 class Enemy(val name: String, var hp: Int,
-  val attack: Int,
+  var attack: Int,
   var defense: Int,
   val weight: Int)  extends AEnemy{
 

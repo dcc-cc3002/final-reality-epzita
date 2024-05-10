@@ -7,8 +7,8 @@ import model.character.Character
  */
 abstract class PhysicalWeapon extends Weapon{
   val name: String
-  var damage: Int
-  val defense: Int
+  protected var damage: Int
+  protected val defense: Int
   val weight: Int
 
   var owner: Option[Character] = None
@@ -18,8 +18,12 @@ abstract class PhysicalWeapon extends Weapon{
    *
    * @return damage
    */
-  def getDamage(): Int = {
+  override def getDamage: Int = {
     this.damage
+  }
+
+  override def getDefense: Int = {
+    this.defense
   }
 
   /**

@@ -35,7 +35,7 @@ class CharacterTest extends FunSuite{
   }
   test("A character with a weapon equipped can attack another character"){
     warrior.equipWeapon(sword)
-    val damage = sword.damage - dummy.defense
+    val damage = sword.getDamage - dummy.defense
     val expected = dummy.hp - damage
     warrior.attack(dummy)
     assertEquals(dummy.hp , expected)

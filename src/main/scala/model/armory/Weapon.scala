@@ -8,10 +8,12 @@ import model.character.Character
  */
 trait Weapon {
   val name: String
-  var damage: Int
-  val defense: Int
+  protected var damage: Int
+  protected val defense: Int
   val weight: Int
 
   def setOwner(character: Character): Unit
   def leaveOwner(): Unit
+  def getDamage: Int
+  def getDefense: Int
 }
