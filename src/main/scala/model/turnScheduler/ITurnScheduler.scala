@@ -12,6 +12,6 @@ trait ITurnScheduler {
   def removeCharacter(character: Character): Unit
   def setCharacterMaxActionBar(characters: ArrayBuffer[Character]): Unit
   def resetCharacterActionBar(characters:ArrayBuffer[Character]): Unit
-  def updateCharacterActionBar(k: Int, characters: ArrayBuffer[Character]): Unit
+  def updateCharacterActionBar(k: Int): Unit
 
 }

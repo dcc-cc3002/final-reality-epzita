@@ -17,11 +17,10 @@ class TurnSchedulerTest extends FunSuite {
   var turnScheduler : TurnScheduler =_
 
   override def beforeEach(context: BeforeEach): Unit = {
-    warrior = new Warrior("Pepsita", 35, 8, 62)
-    dummy = new Paladin("Dummy", 30, 5, 10)
-    sword = new Sword("Excalibur", 10, 10, 10)
+    warrior = new Warrior("Pepsita", 35, 8, 20)
+    dummy = new Paladin("Dummy", 30, 5, 25)
     woodenSword = new Sword("Stick", 1, 10, 10)
-    enemy = new Enemy("Bad guy", 10, 8, 5, 20)
+    enemy = new Enemy("Bad guy", 10, 8, 5, 30)
     turnScheduler = new TurnScheduler()
   }
 
@@ -63,32 +62,72 @@ class TurnSchedulerTest extends FunSuite {
     assertEquals(turnScheduler.fightingCharacters(0).actionBar, 0)
   }
 
-  test("A turn scheduler can increase its character's actionBar"){
-    turnScheduler.addNewCharacter(warrior)
-    turnScheduler.addNewCharacter(enemy)
 
-    turnScheduler.updateCharacterActionBar(5, turnScheduler.fightingCharacters)
-
-    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 5)
-    assertEquals(turnScheduler.fightingCharacters(1).actionBar, 5)
-
-    turnScheduler.updateCharacterActionBar(2, turnScheduler.fightingCharacters)
-
-    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 7)
-    assertEquals(turnScheduler.fightingCharacters(1).actionBar, 7)
-  }
 
   test("A turn scheduler can reset its character's actionBar"){
     turnScheduler.addNewCharacter(warrior)
     turnScheduler.addNewCharacter(enemy)
 
     //we set the character's action bar to be different than 0
-    turnScheduler.updateCharacterActionBar(5, turnScheduler.fightingCharacters)
+    turnScheduler.enqueueCharacters()
+    turnScheduler.updateCharacterActionBar(5)
 
-    turnScheduler.resetCharacterActionBar(turnScheduler.fightingCharacters)
+    turnScheduler.resetCharacterActionBar(turnScheduler.waitList)
 
-    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 0)
-    assertEquals(turnScheduler.fightingCharacters(1).actionBar, 0)
+    assertEquals(turnScheduler.waitList(0).actionBar, 0)
+    assertEquals(turnScheduler.waitList(1).actionBar, 0)
+  }
 
+  test("A turn scheduler can add its characters to a waitList before assigning a turn order"){
+    turnScheduler.addNewCharacter(warrior)
+    turnScheduler.addNewCharacter(dummy)
+    turnScheduler.addNewCharacter(enemy)
+
+    turnScheduler.enqueueCharacters()
+
+    assertEquals(turnScheduler.fightingCharacters, turnScheduler.waitList)
+  }
+
+  test("A turn scheduler can increase its character's actionBar") {
+    turnScheduler.addNewCharacter(warrior)
+    turnScheduler.addNewCharacter(enemy)
+
+    turnScheduler.enqueueCharacters()
+    turnScheduler.updateCharacterActionBar(5)
+
+    assertEquals(turnScheduler.waitList(0).actionBar, 5)
+    assertEquals(turnScheduler.waitList(1).actionBar, 5)
+
+    turnScheduler.updateCharacterActionBar(2)
+
+    assertEquals(turnScheduler.waitList(0).actionBar, 7)
+    assertEquals(turnScheduler.waitList(1).actionBar, 7)
+  }
+
+  test("A turn scheduler can give its character a turn order"){
+    turnScheduler.addNewCharacter(warrior)
+    turnScheduler.addNewCharacter(dummy)
+    turnScheduler.addNewCharacter(enemy)
+
+    turnScheduler.enqueueCharacters()
+
+    turnScheduler.updateCharacterActionBar(30)
+
+    //weight comparison:
+    //warrior < dummy < enemy
+    val expected = ArrayBuffer(warrior, dummy, enemy)
+    assertEquals(turnScheduler.fightList, expected)
+  }
+
+  test("A turn scheduler knows who's turn is it"){
+    turnScheduler.addNewCharacter(warrior)
+    turnScheduler.addNewCharacter(dummy)
+    turnScheduler.addNewCharacter(enemy)
+
+    turnScheduler.enqueueCharacters()
+    turnScheduler.updateCharacterActionBar(30)
+    turnScheduler.setTurnCharacter()
+    
+    assertEquals(turnScheduler.turnCharacter, warrior)
   }
 }

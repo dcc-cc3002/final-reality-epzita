@@ -10,6 +10,8 @@ abstract class ATurnScheduler extends ITurnScheduler {
   val waitList: ArrayBuffer[Character] = new ArrayBuffer[Character]
   val fightList: ArrayBuffer[Character] = new ArrayBuffer[Character]
 
+  var turnCharacter: Character = _
+
   def addNewCharacter(p: Character): Unit = {
     this.fightingCharacters.addOne(p)
   }
@@ -32,10 +34,34 @@ abstract class ATurnScheduler extends ITurnScheduler {
     }
   }
 
-
-  def updateCharacterActionBar(k: Int, characters: ArrayBuffer[Character]): Unit = {
-    for (character <- characters) {
+  def enqueueCharacters(): Unit = {
+    for(character <- this.fightingCharacters){
+      waitList.addOne(character)
+    }
+  }
+  def cleanWaitList(): Unit = {
+    for(character <- fightList){
+      val index = waitList.indexOf(character)
+      if(index != -1){
+        waitList.remove(index)
+      }
+    }
+  }
+  def updateCharacterActionBar(k: Int): Unit = {
+    for (character <- waitList) {
       character.actionBar += k
+      if(character.actionBar >= character.maxActionBar){
+        fightList.addOne(character)
+      }
+    }
+    this.cleanWaitList()
+  }
+  def setTurnCharacter(): Unit = {
+    if(this.fightList.nonEmpty) {
+      turnCharacter = fightList(0)
+    }
+    else{
+      println("This turn has not yet started")
     }
   }
 }
