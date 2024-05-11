@@ -1,5 +1,6 @@
 package model.character
 
+import exceptions.Require
 import model.armory.Weapon
 
 /**
@@ -10,12 +11,19 @@ import model.armory.Weapon
 abstract class ACharacter extends Character {
   /** The name of the character. */
   val name: String
-  /** The current hit points of the character. */
+  /** The current health points of the character. */
   protected var hp: Int
+  /** A character cannot be initialized with negative health points. */
+  protected var _hp: Int = Require.Stat(hp, "hp") atLeast(0)
+
   /** The defense power of the character. */
   protected var defense: Int
+  /** A character cannot be initialized with negative defense. */
+  protected var _defense: Int = Require.Stat(defense, "defense") atLeast(0)
   /** The weight of the character, used for determining the maximum action bar value. */
   val weight: Int
+  /** A character cannot be initialized with negative weight. */
+  protected var _weight: Int = Require.Stat(weight, "weigth") atLeast(0)
 
   /** The weapon currently equipped by the character. */
   var weapon: Option[Weapon] = None

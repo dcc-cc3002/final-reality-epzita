@@ -1,5 +1,6 @@
 package model.characterTest
 
+import exceptions.InvalidStatException
 import model.armory.Sword
 import model.character.specializations.{Paladin, Warrior}
 import munit.FunSuite
@@ -10,6 +11,7 @@ class CharacterTest extends FunSuite{
   var sword: Sword = _
   var dummy: Paladin = _
   var woodenSword: Sword = _
+  var warrior2: Warrior = _
 
   override def beforeEach(context: BeforeEach): Unit ={
     warrior = new Warrior("Pepsita", 35, 8, 62)
@@ -46,5 +48,13 @@ class CharacterTest extends FunSuite{
     warrior.attack(dummy)
     assertEquals(dummy.getHp, expected)
   }
-
+  test("A character can't be initialized with negative Hp"){
+    intercept[InvalidStatException](new Warrior("InvalidHpWarrior", -1,1 ,1))
+  }
+  test("A character can't be initialized with negative Hp") {
+    intercept[InvalidStatException](new Warrior("InvalidDefenseWarrior", 1, -1, 1))
+  }
+  test("A character can't be initialized with negative Hp") {
+    intercept[InvalidStatException](new Warrior("InvalidWeightWarrior",1,1,-1){})
+  }
 }
