@@ -3,17 +3,43 @@ package model.armory
 import model.character.Character
 
 /**
- * weapon interface, helps create different kinds of weapon classes and eventually
- * every weapon
+ * Trait defining a weapon in a role-playing game.
+ *
+ * This trait helps create different kinds of weapon classes and represents every weapon in the game.
  */
 trait Weapon {
+  /** The name of the weapon. */
   val name: String
+  /** The base damage inflicted by the weapon. */
   protected var damage: Int
+  /** The defense power of the weapon. */
   protected val defense: Int
+  /** The weight of the weapon. */
   val weight: Int
 
+  /**
+   * Sets the owner of the weapon to the given character.
+   *
+   * @param character The character who will become the owner of the weapon.
+   */
   def setOwner(character: Character): Unit
+
+  /**
+   * Leaves the current owner of the weapon, making it available for another character to equip.
+   */
   def leaveOwner(): Unit
+
+  /**
+   * Returns the damage inflicted by the weapon.
+   *
+   * @return The damage inflicted by the weapon.
+   */
   def getDamage: Int
+
+  /**
+   * Returns the defense power of the weapon.
+   *
+   * @return The defense power of the weapon.
+   */
   def getDefense: Int
 }

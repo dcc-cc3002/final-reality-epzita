@@ -4,26 +4,35 @@ import model.character.Character
 import scala.collection.mutable.ArrayBuffer
 
 /**
- * Party class, creates an array containing Characters
+ * Class representing a party of characters in a role-playing game.
+ *
+ * This class manages a group of characters who are part of the player's party.
  */
 class Party {
+  /** The current members of the party. */
   val currentParty: ArrayBuffer[Character] = new ArrayBuffer[Character]
+
+  /**
+   * Adds a character to the party.
+   *
+   * @param member The character to add to the party.
+   */
   def addMember(member: Character): Unit = {
     currentParty.addOne(member)
   }
 
   /**
+   * Determines whether the party has been defeated.
    *
-   * @return state of the party
+   * A party is considered defeated if the total hit points of all party members are zero.
+   *
+   * @return true if the party has been defeated, false otherwise.
    */
   def isDefeated: Boolean = {
-    //for character in party if character.hp == 0 return true (comparar y verificar todos?)
-    var total_hp: Int = 0;
-    for(partyMember <- currentParty){
+    var total_hp: Int = 0
+    for (partyMember <- currentParty) {
       total_hp = total_hp + partyMember.getHp
     }
-    total_hp == 0;
+    total_hp == 0
   }
-
-
 }

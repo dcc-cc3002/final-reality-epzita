@@ -3,44 +3,61 @@ package model.character
 import model.armory.Weapon
 
 /**
- * defines a the Character type which provides a base structure
- * for the rest of specializations, for example, a Warrior must be a
- * Character
+ * Abstract class defining a character in a role-playing game.
+ *
+ * This class provides a base structure for character specializations, such as Warriors and Mages.
  */
 abstract class ACharacter extends Character {
-  /** character's stats */
+  /** The name of the character. */
   val name: String
+  /** The current hit points of the character. */
   protected var hp: Int
+  /** The defense power of the character. */
   protected var defense: Int
+  /** The weight of the character, used for determining the maximum action bar value. */
   val weight: Int
 
+  /** The weapon currently equipped by the character. */
   var weapon: Option[Weapon] = None
 
+  /** The maximum value of the action bar for the character. */
   var maxActionBar: Int = weight
+  /** The current value of the action bar for the character. */
   var actionBar = 0
 
+  /**
+   * Returns the current hit points of the character.
+   *
+   * @return The current hit points of the character.
+   */
   override def getHp: Int = {
     this.hp
   }
 
+  /**
+   * Sets the hit points of the character to the given value.
+   *
+   * @param hp The new hit points value.
+   */
   override def setHp(hp: Int): Unit ={
     this.hp = hp
   }
 
+  /**
+   * Returns the defense power of the character.
+   *
+   * @return The defense power of the character.
+   */
   override def getDefense: Int = {
     this.defense
   }
 
-  override def setMaxActionBar(): Unit = {
-    weapon match {
-      case Some(weapon) =>
-        this.maxActionBar = this.weight + weapon.weight
-
-      case None =>
-        this.maxActionBar = this.weight
-    }
-  }
-/**
+  /**
+   * Sets the maximum value of the action bar for the character.
+   *
+   * If a weapon is equipped, the maximum action bar value is the sum of the character's weight and the weapon's weight.
+   * Otherwise, it is just the character's weight.
+   */
   override def setMaxActionBar(): Unit = {
     if (weapon.isDefined) {
       this.maxActionBar = this.weight + weapon.get.weight
@@ -50,35 +67,33 @@ abstract class ACharacter extends Character {
     }
   }
 
+  /**
+   * Attacks the given character, reducing their hit points based on the character's attack power and the target's defense.
+   *
+   * If the character has no weapon equipped, a message is printed indicating that the character has no weapon.
+   *
+   * @param character The character to attack.
+   */
   override def attack(character: Character): Unit = {
     if (weapon.isDefined) {
-      val damage = weapon.get.damage - character.defense
+      val damage = weapon.get.getDamage - character.getDefense
       if (damage > 0) {
-        character.hp -= damage
+        character.setHp(character.getHp - damage)
       } else {
-        character.hp = 0
+        character.setHp(character.getHp)
       }
     } else {
-      println(s"${this.name} no tiene un arma equipada.")
-    }
-  }
-  */
-  override def attack(character: Character): Unit = {
-    weapon match {
-      case Some(weapon) =>
-        val damage = weapon.getDamage - character.getDefense
-        if (damage > 0) {
-          val currentHp = character.getHp
-          character.setHp(currentHp- damage)
-        }
-        else {
-          character.setHp(character.getHp)
-        }
-      case None =>
-        println(s"${this.name} no tiene un arma equipada.")
+      println(s"${this.name} has no weapon equipped.")
     }
   }
 
+  /**
+   * Equips the given weapon to the character.
+   *
+   * If the character already has a weapon equipped, it is unequipped before equipping the new weapon.
+   *
+   * @param weapon The weapon to equip.
+   */
   def equipWeapon(weapon: Weapon): Unit = {
     if (this.weapon.isEmpty) {
       this.weapon = Some(weapon)
@@ -87,16 +102,21 @@ abstract class ACharacter extends Character {
     }
   }
 
+  /**
+   * Unequips the currently equipped weapon from the character.
+   */
   def unequipWeapon(): Unit = {
     this.weapon = None
     this.setMaxActionBar()
   }
 
   /**
-   * @return boolean indicating if there is in fact a weapon equipped or not
+   * Checks if the character has a weapon equipped.
+   *
+   * @return true if the character has a weapon equipped, false otherwise.
    */
   def hasWeapon: Boolean = {
-     this.weapon.isDefined
+    this.weapon.isDefined
   }
 }
 

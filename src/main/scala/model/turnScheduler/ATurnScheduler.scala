@@ -4,63 +4,111 @@ import model.character.Character
 
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Abstract class implementing a turn scheduler for managing the order of characters in a battle.
+ *
+ * This class extends ITurnScheduler and provides basic functionality for managing turns in a battle.
+ */
 abstract class ATurnScheduler extends ITurnScheduler {
-
+  /** The list of characters currently in the fight. */
   val fightingCharacters: ArrayBuffer[Character] = new ArrayBuffer[Character]
+  /** The list of characters waiting for their turn. */
   val waitList: ArrayBuffer[Character] = new ArrayBuffer[Character]
+  /** The list of characters scheduled to fight. */
   val fightList: ArrayBuffer[Character] = new ArrayBuffer[Character]
 
+  /** The character currently taking their turn. */
   var turnCharacter: Character = _
 
-  def addNewCharacter(p: Character): Unit = {
-    this.fightingCharacters.addOne(p)
+  /**
+   * Adds a new character to the scheduler.
+   *
+   * @param character The character to add.
+   */
+  def addNewCharacter(character: Character): Unit = {
+    this.fightingCharacters.addOne(character)
   }
 
-  def removeCharacter(p: Character): Unit = {
-    val index = this.fightingCharacters.indexOf(p)
-    this.fightingCharacters.remove(index)
+  /**
+   * Removes a character from the scheduler.
+   *
+   * @param character The character to remove.
+   */
+  def removeCharacter(character: Character): Unit = {
+    val index = this.fightingCharacters.indexOf(character)
+    if (index != -1) {
+      this.fightingCharacters.remove(index)
+    }
   }
 
-
+  /**
+   * Sets the maximum action bar value for the characters in the given list.
+   *
+   * @param characters The list of characters for which to set the maximum action bar value.
+   */
   def setCharacterMaxActionBar(characters: ArrayBuffer[Character]): Unit = {
     for (character <- characters) {
       character.setMaxActionBar()
     }
   }
 
+  /**
+   * Resets the action bar value for the characters in the given list.
+   *
+   * @param characters The list of characters for which to reset the action bar value.
+   */
   def resetCharacterActionBar(characters: ArrayBuffer[Character]): Unit = {
-    for(character <- characters){
+    for (character <- characters) {
       character.actionBar = 0
     }
   }
 
+  /**
+   * Moves characters from the fighting list to the wait list.
+   */
   def enqueueCharacters(): Unit = {
-    for(character <- this.fightingCharacters){
-      waitList.addOne(character)
+    for (character <- this.fightingCharacters) {
+      this.waitList.addOne(character)
     }
   }
+
+  /**
+   * Removes characters from the wait list that are now in the fight list.
+   */
   private def cleanWaitList(): Unit = {
-    for(character <- fightList){
-      val index = waitList.indexOf(character)
-      if(index != -1){
-        waitList.remove(index)
+    for (character <- this.fightList) {
+      val index = this.waitList.indexOf(character)
+      if (index != -1) {
+        this.waitList.remove(index)
       }
     }
   }
+
+  /**
+   * Updates the action bar value for all characters in the wait list by increasing it by k.
+   * Moves characters from the wait list to the fight list if their action bar value is equal to or greater than their maximum action bar value.
+   * Cleans up the wait list by removing characters that are now in the fight list.
+   *
+   * @param k The amount by which to increase the action bar value.
+   */
   def updateCharacterActionBar(k: Int): Unit = {
-    for (character <- waitList) {
+    for (character <- this.waitList) {
       character.actionBar += k
-      if(character.actionBar >= character.maxActionBar){
-        fightList.addOne(character)
+      if (character.actionBar >= character.maxActionBar) {
+        this.fightList.addOne(character)
       }
     }
     this.cleanWaitList()
   }
+
+  /**
+   * Sets the character currently taking their turn to the first character in the fight list.
+   * Prints a message if the fight list is empty.
+   */
   def setTurnCharacter(): Unit = {
-    if(this.fightList.nonEmpty) {
-      turnCharacter = fightList(0)
-    }
-    else{
+    if (this.fightList.nonEmpty) {
+      this.turnCharacter = this.fightList(0)
+    } else {
       println("This turn has not yet started")
     }
   }
