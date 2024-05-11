@@ -12,9 +12,9 @@ import model.character.AMagicCharacter
  * @param mp mana points, indicates what spells the character can cast
  */
 class BlackMage(val name: String,
-                var hp: Int,
-                var defense: Int,
+                protected var hp: Int,
+                protected var defense: Int,
                 val weight: Int,
-                var mp: Int) extends AMagicCharacter{
+                protected var mp: Int) extends AMagicCharacter{
 
 }

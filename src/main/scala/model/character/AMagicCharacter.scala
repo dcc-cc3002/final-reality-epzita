@@ -10,8 +10,12 @@ import model.armory.Weapon
  */
 abstract class AMagicCharacter extends ACharacter {
   val name: String
-  var hp: Int
-  var defense: Int
+  protected var hp: Int
+  protected var defense: Int
   val weight: Int
-  var mp: Int
+  protected var mp: Int
+
+  def getMp: Int = {
+    this.mp
+  }
 }

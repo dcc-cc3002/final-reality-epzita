@@ -8,9 +8,8 @@ package model.character
  * @param defense defense points
  * @param weight weight, helps determine position during combat turns
  */
-class Enemy(val name: String, var hp: Int,
-  var attack: Int,
-  var defense: Int,
+class Enemy(val name: String, protected var hp: Int,
+  var attack: Int, protected var defense: Int,
   val weight: Int)  extends AEnemy{
 
 }

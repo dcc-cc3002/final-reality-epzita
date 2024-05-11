@@ -10,14 +10,26 @@ import model.armory.Weapon
 abstract class ACharacter extends Character {
   /** character's stats */
   val name: String
-  var hp: Int
-  var defense: Int
+  protected var hp: Int
+  protected var defense: Int
   val weight: Int
 
   var weapon: Option[Weapon] = None
 
   var maxActionBar: Int = weight
   var actionBar = 0
+
+  override def getHp: Int = {
+    this.hp
+  }
+
+  override def setHp(hp: Int): Unit ={
+    this.hp = hp
+  }
+
+  override def getDefense: Int = {
+    this.defense
+  }
 
   override def setMaxActionBar(): Unit = {
     weapon match {
@@ -54,12 +66,13 @@ abstract class ACharacter extends Character {
   override def attack(character: Character): Unit = {
     weapon match {
       case Some(weapon) =>
-        val damage = weapon.getDamage - character.defense
+        val damage = weapon.getDamage - character.getDefense
         if (damage > 0) {
-          character.hp -= damage
+          val currentHp = character.getHp
+          character.setHp(currentHp- damage)
         }
         else {
-          character.hp = character.hp
+          character.setHp(character.getHp)
         }
       case None =>
         println(s"${this.name} no tiene un arma equipada.")

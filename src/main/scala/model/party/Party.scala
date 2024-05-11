@@ -20,7 +20,7 @@ class Party {
     //for character in party if character.hp == 0 return true (comparar y verificar todos?)
     var total_hp: Int = 0;
     for(partyMember <- currentParty){
-      total_hp = total_hp + partyMember.hp
+      total_hp = total_hp + partyMember.getHp
     }
     total_hp == 0;
   }

@@ -5,8 +5,8 @@ package model.character
  */
 trait Character {
   val name: String
-  var hp: Int
-  var defense: Int
+  protected var hp: Int
+  protected var defense: Int
   val weight: Int
 
   var maxActionBar: Int
@@ -14,5 +14,8 @@ trait Character {
 
   def attack(character: Character): Unit
   def setMaxActionBar(): Unit
+  def getHp: Int
+  def setHp(hp: Int): Unit
+  def getDefense: Int
 
 }

@@ -19,8 +19,8 @@ class CharacterTest extends FunSuite{
   }
   test("A character must have correctly set up its stats") {
     assertEquals(warrior.name, "Pepsita")
-    assertEquals(warrior.hp, 35)
-    assertEquals(warrior.defense, 8)
+    assertEquals(warrior.getHp, 35)
+    assertEquals(warrior.getDefense, 8)
     assertEquals(warrior.weight, 62)
   }
 
@@ -35,16 +35,16 @@ class CharacterTest extends FunSuite{
   }
   test("A character with a weapon equipped can attack another character"){
     warrior.equipWeapon(sword)
-    val damage = sword.getDamage - dummy.defense
-    val expected = dummy.hp - damage
+    val damage = sword.getDamage - dummy.getDefense
+    val expected = dummy.getHp - damage
     warrior.attack(dummy)
-    assertEquals(dummy.hp , expected)
+    assertEquals(dummy.getHp , expected)
   }
   test("If a character's defense is higher than the damage of the weapon attacking him, he doesn't receive damage") {
     warrior.equipWeapon(woodenSword)
-    val expected = dummy.hp
+    val expected = dummy.getHp
     warrior.attack(dummy)
-    assertEquals(dummy.hp, expected)
+    assertEquals(dummy.getHp, expected)
   }
 
 }

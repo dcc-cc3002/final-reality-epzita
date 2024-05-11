@@ -12,8 +12,8 @@ class PhysicalCharacterTest extends FunSuite{
   }
   test("A physical damage character must have correctly set up its stats") {
     assertEquals(ninja.name, "Naruto")
-    assertEquals(ninja.hp, 20)
-    assertEquals(ninja.defense, 15)
+    assertEquals(ninja.getHp, 20)
+    assertEquals(ninja.getDefense, 15)
     assertEquals(ninja.weight, 70)
   }
 }

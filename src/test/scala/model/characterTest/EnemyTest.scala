@@ -18,7 +18,7 @@ class EnemyTest extends FunSuite {
   }
 
   test("Checking hp") {
-    assertEquals(enemy.hp, 100)
+    assertEquals(enemy.getHp, 100)
   }
 
   test("Checking defense") {
@@ -26,7 +26,7 @@ class EnemyTest extends FunSuite {
   }
 
   test("Checking weight") {
-    assertEquals(enemy.defense, 40)
+    assertEquals(enemy.getDefense, 40)
   }
 
   test("Checking weight"){
@@ -38,9 +38,9 @@ class EnemyTest extends FunSuite {
   }
 
   test("An enemy can attack a character"){
-    val expected = dummy.hp - enemy.attack + dummy.defense
+    val expected = dummy.getHp - enemy.attack + dummy.getDefense
     enemy.attack(dummy)
-    assertEquals(dummy.hp, expected)
+    assertEquals(dummy.getHp, expected)
   }
 
 }

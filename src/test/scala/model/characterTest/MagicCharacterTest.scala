@@ -15,12 +15,12 @@ class MagicCharacterTest extends FunSuite{
 
   test("A magic character must have correctly set up its stats") {
     assertEquals(whiteMage.name, "Gandalf")
-    assertEquals(whiteMage.hp, 15)
-    assertEquals(whiteMage.defense, 5)
+    assertEquals(whiteMage.getHp, 15)
+    assertEquals(whiteMage.getDefense, 5)
     assertEquals(whiteMage.weight, 60)
 
     //A magic character has mana points
-    assertEquals(whiteMage.mp, 100)
+    assertEquals(whiteMage.getMp, 100)
   }
 
 }
