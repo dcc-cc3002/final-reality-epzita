@@ -1,5 +1,6 @@
 package model.armory
 
+import exceptions.Require
 import model.character.{ACharacter, AMagicCharacter, Character}
 
 /**
@@ -12,12 +13,20 @@ abstract class MagicWeapon extends Weapon {
   val name: String
   /** The base damage inflicted by the weapon. */
   protected var damage: Int
+  /** A weapon cannot be initialized with negative damage */
+  protected var _damage: Int = Require.Stat(damage, "damage") atLeast(0)
   /** The magic damage inflicted by the weapon. */
   protected var magicDamage: Int
+  /** A weapon cannot be initialized with negative magic damage */
+  protected var _magicDamage: Int = Require.Stat(magicDamage, "magicDamage") atLeast(0)
   /** The defense power of the weapon. */
   protected val defense: Int
+  /** A weapon cannot be initialized with defense */
+  protected var _defense: Int = Require.Stat(defense, "defense") atLeast(0)
   /** The weight of the weapon. */
   val weight: Int
+  /** A weapon cannot be initialized with negative weight */
+  protected var _weight: Int = Require.Stat(weight, "weight") atLeast(0)
 
   /** The character who currently owns the weapon. */
   var owner: Option[Character] = None

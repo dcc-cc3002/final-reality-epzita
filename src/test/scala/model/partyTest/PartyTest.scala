@@ -18,14 +18,14 @@ class PartyTest extends FunSuite {
   override def beforeEach(context: BeforeEach): Unit = {
     blackMage = new BlackMage("Saruman", 20, 10, 50, 95)
     whiteMage = new WhiteMage("Gandalf", 15, 5, 60, 100)
-    paladin = new Paladin("Belfor", 30, 10, 75)
+    paladin = new Paladin("Paladin", 30, 10, 75)
     ninja = new Ninja("Naruto", 0, 15, 70)
     warrior = new Warrior("Pepsita", 0, 8, 62)
     party = new Party()
 
   }
 
-  test("Testing addMember method") {
+  test("A party can add new members") {
     party.addMember(paladin)
     party.addMember(whiteMage)
 
@@ -33,14 +33,14 @@ class PartyTest extends FunSuite {
     assertEquals(party.currentParty(1), whiteMage)
   }
 
-  test("Testing isDefeated method when false"){
+  test("A party can tell if it hasn't been defeated"){
     party.addMember(paladin)
     party.addMember(whiteMage)
 
     assertEquals(party.isDefeated, false)
   }
 
-  test("Testing isDefeated method when true"){
+  test("A party can tell if it has been defeated"){
     party.addMember(ninja)
     party.addMember(warrior)
 
