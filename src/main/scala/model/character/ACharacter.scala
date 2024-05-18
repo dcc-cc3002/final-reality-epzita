@@ -102,13 +102,7 @@ abstract class ACharacter extends Character {
    *
    * @param weapon The weapon to equip.
    */
-  def equipWeapon(weapon: Weapon): Unit = {
-    if (this.weapon.isEmpty) {
-      this.weapon = Some(weapon)
-      weapon.setOwner(this)
-      this.setMaxActionBar()
-    }
-  }
+  def equipWeapon(weapon: Weapon): Unit
 
   /**
    * Unequips the currently equipped weapon from the character.

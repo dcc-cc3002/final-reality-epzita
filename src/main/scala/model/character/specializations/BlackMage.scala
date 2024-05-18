@@ -1,6 +1,6 @@
 package model.character.specializations
 
-import model.armory.MagicWeapon
+import model.armory.{MagicWeapon, Weapon}
 import model.character.AMagicCharacter
 
 /**
@@ -16,5 +16,12 @@ class BlackMage(val name: String,
                 protected var defense: Int,
                 val weight: Int,
                 protected var mp: Int) extends AMagicCharacter{
+  def equipWeapon(weapon: Weapon): Unit = {
+    if (this.weapon.isEmpty) {
+      this.weapon = Some(weapon)
+      weapon.setOwner(this)
+      this.setMaxActionBar()
+    }
+  }
 
 }
