@@ -1,6 +1,6 @@
 package model.turnScheduler
 
-import model.character.Character
+import model.character.{Character, GameUnit}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -11,21 +11,21 @@ import scala.collection.mutable.ArrayBuffer
  */
 abstract class ATurnScheduler extends ITurnScheduler {
   /** The list of characters currently in the fight. */
-  val fightingCharacters: ArrayBuffer[Character] = new ArrayBuffer[Character]
+  val fightingCharacters: ArrayBuffer[GameUnit] = new ArrayBuffer[GameUnit]
   /** The list of characters waiting for their turn. */
-  val waitList: ArrayBuffer[Character] = new ArrayBuffer[Character]
+  val waitList: ArrayBuffer[GameUnit] = new ArrayBuffer[GameUnit]
   /** The list of characters scheduled to fight. */
-  val fightList: ArrayBuffer[Character] = new ArrayBuffer[Character]
+  val fightList: ArrayBuffer[GameUnit] = new ArrayBuffer[GameUnit]
 
   /** The character currently taking their turn. */
-  var turnCharacter: Character = _
+  var turnCharacter: GameUnit = _
 
   /**
    * Adds a new character to the scheduler.
    *
    * @param character The character to add.
    */
-  def addNewCharacter(character: Character): Unit = {
+  def addNewCharacter(character: GameUnit): Unit = {
     this.fightingCharacters.addOne(character)
   }
 
@@ -34,7 +34,7 @@ abstract class ATurnScheduler extends ITurnScheduler {
    *
    * @param character The character to remove.
    */
-  def removeCharacter(character: Character): Unit = {
+  def removeCharacter(character: GameUnit): Unit = {
     val index = this.fightingCharacters.indexOf(character)
     if (index != -1) {
       this.fightingCharacters.remove(index)
@@ -46,7 +46,7 @@ abstract class ATurnScheduler extends ITurnScheduler {
    *
    * @param characters The list of characters for which to set the maximum action bar value.
    */
-  def setCharacterMaxActionBar(characters: ArrayBuffer[Character]): Unit = {
+  def setCharacterMaxActionBar(characters: ArrayBuffer[GameUnit]): Unit = {
     for (character <- characters) {
       character.setMaxActionBar()
     }
@@ -57,7 +57,7 @@ abstract class ATurnScheduler extends ITurnScheduler {
    *
    * @param characters The list of characters for which to reset the action bar value.
    */
-  def resetCharacterActionBar(characters: ArrayBuffer[Character]): Unit = {
+  def resetCharacterActionBar(characters: ArrayBuffer[GameUnit]): Unit = {
     for (character <- characters) {
       character.actionBar = 0
     }

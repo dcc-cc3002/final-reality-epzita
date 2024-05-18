@@ -1,7 +1,7 @@
 package model.turnScheduler
 
 import scala.collection.mutable.ArrayBuffer
-import model.character.Character
+import model.character.{Character, GameUnit}
 
 /**
  * Trait defining a turn scheduler for managing the order of characters in a battle.
@@ -10,39 +10,39 @@ import model.character.Character
  */
 trait ITurnScheduler {
   /** The list of characters currently in the fight. */
-  val fightingCharacters: ArrayBuffer[Character]
+  val fightingCharacters: ArrayBuffer[GameUnit]
   /** The list of characters waiting for their turn. */
-  val waitList: ArrayBuffer[Character]
+  val waitList: ArrayBuffer[GameUnit]
   /** The list of characters scheduled to fight. */
-  val fightList: ArrayBuffer[Character]
+  val fightList: ArrayBuffer[GameUnit]
 
   /**
    * Adds a new character to the scheduler.
    *
    * @param character The character to add.
    */
-  def addNewCharacter(character: Character): Unit
+  def addNewCharacter(character: GameUnit): Unit
 
   /**
    * Removes a character from the scheduler.
    *
    * @param character The character to remove.
    */
-  def removeCharacter(character: Character): Unit
+  def removeCharacter(character: GameUnit): Unit
 
   /**
    * Sets the maximum action bar value for the characters in the given list.
    *
    * @param characters The list of characters for which to set the maximum action bar value.
    */
-  def setCharacterMaxActionBar(characters: ArrayBuffer[Character]): Unit
+  def setCharacterMaxActionBar(characters: ArrayBuffer[GameUnit]): Unit
 
   /**
    * Resets the action bar value for the characters in the given list.
    *
    * @param characters The list of characters for which to reset the action bar value.
    */
-  def resetCharacterActionBar(characters: ArrayBuffer[Character]): Unit
+  def resetCharacterActionBar(characters: ArrayBuffer[GameUnit]): Unit
 
   /**
    * Updates the action bar value for all characters by increasing it by k.

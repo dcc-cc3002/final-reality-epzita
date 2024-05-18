@@ -82,7 +82,7 @@ abstract class ACharacter extends Character {
    *
    * @param character The character to attack.
    */
-  override def attack(character: Character): Unit = {
+  def attack(character: Enemy): Unit = {
     if (weapon.isDefined) {
       val damage = weapon.get.getDamage - character.getDefense
       if (damage > 0) {

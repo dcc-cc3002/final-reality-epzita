@@ -52,5 +52,10 @@ class SwordTest extends FunSuite {
     intercept[InvalidStatException](new Sword("InvalidSword",1,1,-1))
   }
 
+  /**
+   * A Sword can be equipped by the next character(s): Warrior, Paladin, Ninja, BlackMage
+   * A Sword cannot be equipped by the next character(s): WhiteMage
+   */
+
 
 }

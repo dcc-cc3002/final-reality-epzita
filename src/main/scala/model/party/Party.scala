@@ -18,7 +18,13 @@ class Party {
    * @param member The character to add to the party.
    */
   def addMember(member: Character): Unit = {
-    currentParty.addOne(member)
+    if(currentParty.length < 3){
+      currentParty.addOne(member)
+    }
+    else {
+      throw new Exception("A party cannot have more than 3 members")
+    }
+
   }
 
   /**

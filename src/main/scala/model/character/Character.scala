@@ -6,7 +6,7 @@ package model.character
  *
  * This trait defines the common properties and behavior of characters in the game.
  */
-trait Character {
+trait Character extends GameUnit {
   /** The name of the character. */
   val name: String
   /** The current hit points of the character. */
@@ -26,7 +26,7 @@ trait Character {
  *
  * @param character The character to attack.
    */
-  def attack(character: Character): Unit
+  def attack(character: Enemy): Unit
 
   /**
  * Sets the maximum value of the action bar for the character based on its weight.

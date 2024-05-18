@@ -5,7 +5,7 @@ package model.character
  *
  * This class defines the common properties and behavior of enemies in the game.
  */
-abstract class AEnemy extends Character {
+abstract class AEnemy extends GameUnit {
   /** The name of the enemy. */
   val name: String
   /** The current hit points of the enemy. */
@@ -61,7 +61,7 @@ abstract class AEnemy extends Character {
    *
    * @param character The character to attack.
    */
-  override def attack(character: Character): Unit = {
+  def attack(character: Character): Unit = {
     character.setHp(character.getHp + character.getDefense - this.attack)
   }
 

@@ -17,11 +17,17 @@ class Sword(val name: String,
     if (this.owner.isEmpty) {
       this.owner = Some(warrior)
     }
+    else {
+      throw new Exception("This weapon already has an owner")
+    }
   }
 
   def setOwner(paladin: Paladin): Unit = {
     if (this.owner.isEmpty) {
       this.owner = Some(paladin)
+    }
+    else {
+      throw new Exception("This weapon already has an owner")
     }
   }
 
@@ -29,17 +35,26 @@ class Sword(val name: String,
     if (this.owner.isEmpty) {
       this.owner = Some(ninja)
     }
+    else {
+      throw new Exception("This weapon already has an owner")
+    }
   }
 
   def setOwner(blackMage: BlackMage): Unit = {
     if (this.owner.isEmpty) {
       this.owner = Some(blackMage)
     }
+    else {
+      throw new Exception("This weapon already has an owner")
+    }
   }
 
   def setOwner(whiteMage: WhiteMage): Unit = {
     if(this.owner.isEmpty){
       throw new Exception("Sword cannot be equipped by a White Mage")
+    }
+    else {
+      throw new Exception("This weapon already has an owner")
     }
   }
 

@@ -46,4 +46,12 @@ class PartyTest extends FunSuite {
 
     assertEquals(party.isDefeated, true)
   }
+
+  test("A party cannot have more than 3 members"){
+    party.addMember(ninja)
+    party.addMember(warrior)
+    party.addMember(whiteMage)
+
+    intercept[Exception](party.addMember(paladin))
+  }
 }

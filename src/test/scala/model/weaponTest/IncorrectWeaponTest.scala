@@ -33,6 +33,10 @@ class IncorrectWeaponTest extends FunSuite {
   test("A Ninja can't equip an Axe"){
     intercept[Exception](ninja.equipWeapon(axe))
   }
+  test("A weapon that already has an owner cannot be equipped by another character"){
+    paladin.equipWeapon(sword)
+    intercept[Exception](ninja.equipWeapon(sword))
+  }
 
 }
 
