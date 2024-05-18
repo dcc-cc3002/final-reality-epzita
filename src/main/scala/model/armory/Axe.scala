@@ -30,9 +30,7 @@ class Axe(val name: String,
     if (this.owner.isEmpty) {
       throw new Exception("Axe cannot be equipped by a Ninja")
     }
-    else {
-      throw new Exception("This weapon already has an owner")
-    }
+
   }
 
   def setOwner(blackMage: BlackMage): Unit = {

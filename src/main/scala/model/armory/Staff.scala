@@ -38,26 +38,18 @@ class Staff(val name: String,
     if (this.owner.isEmpty) {
       throw new Exception("Staff cannot be equipped by a Paladin")
     }
-    else {
-      throw new Exception("This weapon already has an owner")
-    }
   }
 
   def setOwner(warrior: Warrior): Unit = {
     if (this.owner.isEmpty) {
       throw new Exception("Staff cannot be equipped by a Warrior")
     }
-    else {
-      throw new Exception("This weapon already has an owner")
-    }
+
   }
 
   def setOwner(ninja: Ninja): Unit = {
     if (this.owner.isEmpty) {
       throw new Exception("Axe cannot be equipped by a Ninja")
-    }
-    else{
-      throw new Exception("This weapon already has an owner")
     }
   }
 }

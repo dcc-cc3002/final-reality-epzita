@@ -38,9 +38,7 @@ class Bow(val name: String,
     if (this.owner.isEmpty) {
       throw new Exception("Bow cannot be equipped by a Paladin")
     }
-    else {
-      throw new Exception("This weapon already has an owner")
-    }
+
   }
 
   def setOwner(blackMage: BlackMage): Unit = {
@@ -48,7 +46,5 @@ class Bow(val name: String,
       throw new Exception("Bow cannot be equipped by a Black Mage")
     }
   }
-
-
 
 }

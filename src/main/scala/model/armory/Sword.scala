@@ -53,11 +53,6 @@ class Sword(val name: String,
     if(this.owner.isEmpty){
       throw new Exception("Sword cannot be equipped by a White Mage")
     }
-    else {
-      throw new Exception("This weapon already has an owner")
-    }
+
   }
-
-
-
 }
