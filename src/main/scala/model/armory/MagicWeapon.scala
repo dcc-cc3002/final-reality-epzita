@@ -1,6 +1,7 @@
 package model.armory
 
 import exceptions.Require
+import model.character.specializations.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
 import model.character.{ACharacter, AMagicCharacter, Character}
 
 /**
@@ -74,16 +75,15 @@ abstract class MagicWeapon extends Weapon {
     setMagicDamage(2)
   }
 
-  /**
-   * Sets the owner of the weapon to the given character.
-   *
-   * @param character The character who will become the owner of the weapon.
-   */
-  def setOwner(character: Character): Unit = {
-    if (owner.isEmpty) {
-      this.owner = Some(character)
-    }
-  }
+  def setOwner(warrior: Warrior): Unit
+
+  def setOwner(paladin: Paladin): Unit
+
+  def setOwner(ninja: Ninja): Unit
+
+  def setOwner(blackMage: BlackMage): Unit
+
+  def setOwner(whiteMage: WhiteMage): Unit
 
   /**
    * Leaves the current owner of the weapon, making it available for another character to equip.
