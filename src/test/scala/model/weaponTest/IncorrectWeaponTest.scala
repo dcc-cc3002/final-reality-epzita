@@ -23,7 +23,7 @@ class IncorrectWeaponTest extends FunSuite {
   }
 
   test("A paladin cannot equip a Staff"){
-    paladin.equipWeapon(sword)
+    intercept[Exception](paladin.equipWeapon(staff))
   }
 
   test("A white mage cant equip a Sword"){
