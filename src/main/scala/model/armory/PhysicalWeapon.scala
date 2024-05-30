@@ -77,4 +77,7 @@ abstract class PhysicalWeapon extends Weapon {
   def leaveOwner(): Unit = {
     this.owner = None
   }
+  def getMagicDamage: Int = {
+    0
+  }
 }

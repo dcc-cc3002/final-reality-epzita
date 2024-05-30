@@ -1,5 +1,5 @@
 package model.sorcery
 
-class Paralize {
+class Paralize(override val manaCost: Int = 25) extends LightSpell {
 
 }

@@ -28,4 +28,8 @@ abstract class AMagicCharacter extends ACharacter {
   def getMp: Int = {
     this.mp
   }
+
+  def setMp(newMana: Int): Unit = {
+    this.mp = newMana
+  }
 }

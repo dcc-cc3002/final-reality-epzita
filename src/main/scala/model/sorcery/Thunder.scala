@@ -1,5 +1,5 @@
 package model.sorcery
 
-class Thunder {
+class Thunder (override val manaCost: Int = 20) extends DarkSpell {
 
 }
