@@ -1,6 +1,7 @@
 package model.character
 
 import model.armory.Weapon
+import model.sorcery.Spell
 
 
 /**
@@ -28,8 +29,11 @@ abstract class AMagicCharacter extends ACharacter {
   def getMp: Int = {
     this.mp
   }
-
   def setMp(newMana: Int): Unit = {
     this.mp = newMana
+  }
+
+  def cast(spell: Spell()): Unit = {
+
   }
 }
