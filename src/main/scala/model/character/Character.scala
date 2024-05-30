@@ -23,6 +23,7 @@ trait Character extends GameUnit {
   /** The current value of the action bar for the character. */
   var actionBar: Int
 
+  var weapon: Option[Weapon]
 
   /**
  * Attacks the given character, reducing their hit points based on the character's attack and the target's defense.

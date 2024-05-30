@@ -7,8 +7,6 @@ trait LightSpell extends Spell {
 
   val manaCost: Int
 
-  def cast(target: GameUnit): Unit
-
   override def canBeCastBy(caster: MagicCharacter): Boolean = {
     caster.canCastLightSpell
   }

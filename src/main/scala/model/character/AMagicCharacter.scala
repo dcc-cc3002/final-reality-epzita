@@ -19,8 +19,7 @@ abstract class AMagicCharacter extends ACharacter with MagicCharacter {
   /** The weight of the character, used for determining the maximum action bar value. */
   val weight: Int
   /** The current mana points of the character. */
-  protected var mp: Int
-
+  var mp: Int
 
 
   /**
@@ -33,6 +32,22 @@ abstract class AMagicCharacter extends ACharacter with MagicCharacter {
   }
   def setMp(newMana: Int): Unit = {
     this.mp = newMana
+  }
+
+  def castSpell(spell: Spell, target: GameUnit): Unit = {
+
+    if(spell.canBeCastBy(this)){
+      if(this.getMp >= spell.manaCost){
+        spell.cast(this, target)
+        this.setMp(this.getMp - spell.manaCost)
+      }
+      else{
+        throw new Exception("This Mage doesn't have enough mana to cast this Spell")
+      }
+    }
+    else{
+      throw new Exception("This Mage can't cast this kind of Magic")
+    }
   }
 
 }
