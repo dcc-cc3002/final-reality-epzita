@@ -16,7 +16,7 @@ class BlackMage(val name: String,
                 protected var hp: Int,
                 protected var defense: Int,
                 val weight: Int,
-                 var mp: Int, val maxMp: Int = 100) extends AMagicCharacter{
+                var mp: Int, val maxMp: Int = 100) extends AMagicCharacter{
   def equipWeapon(weapon: Weapon): Unit = {
     if (this.weapon.isEmpty) {
       this.weapon = Some(weapon)

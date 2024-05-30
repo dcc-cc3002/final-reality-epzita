@@ -33,6 +33,7 @@ abstract class ACharacter extends Character {
   /** The current value of the action bar for the character. */
   var actionBar = 0
 
+
   /**
    * Returns the current hit points of the character.
    *
@@ -48,7 +49,7 @@ abstract class ACharacter extends Character {
    * @param hp The new hit points value.
    */
   override def setHp(hp: Int): Unit ={
-    this.hp = hp
+      this.hp = hp
   }
 
   /**

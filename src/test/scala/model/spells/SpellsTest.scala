@@ -3,7 +3,7 @@ package model.characterTest
 import model.armory.Staff
 import model.character.Enemy
 import model.character.specializations.{BlackMage, WhiteMage}
-import model.sorcery.Fire
+import model.sorcery.{Fire, Heal}
 import munit.FunSuite
 
 class SpellsTest extends FunSuite{
@@ -15,6 +15,7 @@ class SpellsTest extends FunSuite{
   var enemy: Enemy = _
   //spells
   var fire: Fire = _
+  var heal: Heal = _
 
   override def beforeEach(context: BeforeEach): Unit ={
     whiteMage = new WhiteMage("Gandalf", 15, 5, 60, 100)
@@ -22,6 +23,7 @@ class SpellsTest extends FunSuite{
     staff = new Staff("Stick", 10, 10,10,10)
     enemy = new Enemy("Sauron", 100, 10, 10, 10)
     fire = new Fire()
+    heal = new Heal()
 
   }
 
@@ -37,4 +39,9 @@ class SpellsTest extends FunSuite{
     intercept[Exception](whiteMage.castSpell(fire, enemy))
   }
 
+  test("A Heal spell can be casted by a White Mage"){
+    whiteMage.castSpell(heal, enemy)
+    val expected_hp = 130
+    assertEquals(enemy.getHp,130)
+  }
 }

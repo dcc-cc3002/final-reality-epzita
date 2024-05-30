@@ -5,14 +5,8 @@ import model.character.specializations.WhiteMage
 
 class Heal(override val manaCost: Int = 15) extends LightSpell {
   override def cast(caster: Character, target: GameUnit): Unit = {
-    if (caster.weapon.isDefined) {
-      val damage = caster.weapon.get.getMagicDamage
-      target.setHp(target.getHp - damage)
-    }
-    else {
-      throw new Exception("The caster needs to have a Weapon equipped to cast this spell")
-    }
-
+    val heal_amount = (target.getHp*0.3).toInt
+    target.setHp(target.getHp + heal_amount)
   }
 
 }
