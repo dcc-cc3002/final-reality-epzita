@@ -3,8 +3,8 @@ package model.sorcery
 import model.character.GameUnit
 import model.character.specializations.WhiteMage
 
-class Paralize(val caster: WhiteMage, override val manaCost: Int = 25) extends LightSpell {
-  def castSpell(this.caster, target: GameUnit): Unit = {
+class Paralize(override val manaCost: Int = 25) extends LightSpell {
+  def castSpell(caster: Character, target: GameUnit): Unit = {
     if (caster.weapon.isDefined) {
       if (caster.getMp >= this.manaCost) {
         caster.setMp(caster.getMp - this.manaCost)

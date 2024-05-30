@@ -1,7 +1,8 @@
 package model.character.specializations
 
 import model.armory.{MagicWeapon, Weapon}
-import model.character.AMagicCharacter
+import model.character.{AMagicCharacter, GameUnit}
+import model.sorcery.Spell
 
 /**
  *
@@ -23,5 +24,11 @@ class BlackMage(val name: String,
       this.setMaxActionBar()
     }
   }
+
+  override def canCastDarkSpell: Boolean = true
+
+  override def canCastLightSpell: Boolean = false
+
+
 
 }

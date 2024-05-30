@@ -9,7 +9,7 @@ import model.sorcery.Spell
  *
  * This class adds the mana points (mp) attribute to the character.
  */
-abstract class AMagicCharacter extends ACharacter {
+abstract class AMagicCharacter extends ACharacter with MagicCharacter {
   /** The name of the character. */
   val name: String
   /** The current hit points of the character. */
@@ -20,6 +20,8 @@ abstract class AMagicCharacter extends ACharacter {
   val weight: Int
   /** The current mana points of the character. */
   protected var mp: Int
+
+
 
   /**
    * Returns the current mana points of the character.
@@ -33,7 +35,4 @@ abstract class AMagicCharacter extends ACharacter {
     this.mp = newMana
   }
 
-  def cast(spell: Spell()): Unit = {
-
-  }
 }

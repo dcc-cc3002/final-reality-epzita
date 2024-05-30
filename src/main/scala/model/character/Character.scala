@@ -1,5 +1,7 @@
 package model.character
 
+import model.armory.Weapon
+
 
 /**
  * Trait representing a character.
@@ -20,6 +22,7 @@ trait Character extends GameUnit {
   var maxActionBar: Int
   /** The current value of the action bar for the character. */
   var actionBar: Int
+
 
   /**
  * Attacks the given character, reducing their hit points based on the character's attack and the target's defense.
@@ -53,5 +56,8 @@ trait Character extends GameUnit {
  * @return The defense power of the character.
    */
   def getDefense: Int
+
+  def canCastLightSpell: Boolean = false
+  def canCastDarkSpell: Boolean = false
 
 }
