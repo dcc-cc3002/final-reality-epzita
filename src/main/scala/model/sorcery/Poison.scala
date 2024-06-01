@@ -1,5 +1,6 @@
 package model.sorcery
 
+import exceptions.WeaponNotFoundException
 import model.character.{Character, GameUnit}
 import model.character.specializations.WhiteMage
 
@@ -10,7 +11,7 @@ class Poison(override val manaCost: Int = 30) extends LightSpell {
       target.setHp(target.getHp - damage)
     }
     else {
-      throw new Exception("The caster needs to have a Weapon equipped to cast this spell")
+      throw new WeaponNotFoundException("The caster needs to have a Weapon equipped to cast this spell")
     }
 
   }

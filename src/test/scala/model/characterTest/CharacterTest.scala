@@ -1,6 +1,6 @@
 package model.characterTest
 
-import exceptions.InvalidStatException
+import exceptions.{InvalidStatException, WeaponNotFoundException}
 import model.armory.Sword
 import model.character.Enemy
 import model.character.specializations.{Paladin, Warrior}
@@ -59,6 +59,10 @@ class CharacterTest extends FunSuite{
   }
   test("A character can't be initialized with negative Hp") {
     intercept[InvalidStatException](new Warrior("InvalidWeightWarrior",1,1,-1){})
+  }
+
+  test("A character can't attack without a weapon equipped"){
+    intercept[WeaponNotFoundException](warrior.attack(enemy))
   }
   //How to make this test work?
   /**

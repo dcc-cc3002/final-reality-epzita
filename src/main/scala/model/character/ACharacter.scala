@@ -1,6 +1,6 @@
 package model.character
 
-import exceptions.Require
+import exceptions.{Require, WeaponNotFoundException}
 import model.armory.Weapon
 
 /**
@@ -92,7 +92,7 @@ abstract class ACharacter extends Character {
         character.setHp(character.getHp)
       }
     } else {
-      println(s"${this.name} has no weapon equipped.")
+      throw new WeaponNotFoundException("This character doesn't have a weapon equipped")
     }
   }
 
