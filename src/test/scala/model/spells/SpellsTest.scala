@@ -1,5 +1,6 @@
 package model.characterTest
 
+import exceptions.InsufficientManaException
 import model.armory.Staff
 import model.character.Enemy
 import model.character.specializations.{BlackMage, WhiteMage}
@@ -10,6 +11,7 @@ class SpellsTest extends FunSuite{
   //mages
   var whiteMage: WhiteMage = _
   var blackMage: BlackMage = _
+  var noobMage: WhiteMage = _
   //weapons
   var staff: Staff = _
   var enemy: Enemy = _
@@ -20,6 +22,8 @@ class SpellsTest extends FunSuite{
   override def beforeEach(context: BeforeEach): Unit ={
     whiteMage = new WhiteMage("Gandalf", 15, 5, 60, 100)
     blackMage = new BlackMage("Saruman", 20, 10, 60, 100)
+    noobMage = new WhiteMage("Potat", 10, 10, 10, 1)
+
     staff = new Staff("Stick", 10, 10,10,10)
     enemy = new Enemy("Sauron", 100, 10, 10, 10)
     fire = new Fire()
@@ -43,5 +47,10 @@ class SpellsTest extends FunSuite{
     whiteMage.castSpell(heal, enemy)
     val expected_hp = 130
     assertEquals(enemy.getHp,130)
+  }
+
+  test("A spell cannot be casted by a Mage with insufficient mana"){
+    intercept[InsufficientManaException](noobMage.castSpell(heal, enemy))
+
   }
 }

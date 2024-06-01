@@ -1,5 +1,6 @@
 package model.character
 
+import exceptions.{InsufficientManaException, InvalidSpellException}
 import model.armory.Weapon
 import model.sorcery.Spell
 
@@ -42,11 +43,11 @@ abstract class AMagicCharacter extends ACharacter with MagicCharacter {
         this.setMp(this.getMp - spell.manaCost)
       }
       else{
-        throw new Exception("This Mage doesn't have enough mana to cast this Spell")
+        throw new InsufficientManaException("This Mage doesn't have enough mana to cast this Spell")
       }
     }
     else{
-      throw new Exception("This Mage can't cast this kind of Magic")
+      throw new InvalidSpellException("This Mage can't cast this kind of Magic")
     }
   }
 
