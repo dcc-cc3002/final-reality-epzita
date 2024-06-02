@@ -25,12 +25,7 @@ trait Character extends GameUnit {
 
   var weapon: Option[Weapon]
 
-  /**
- * Attacks the given character, reducing their hit points based on the character's attack and the target's defense.
- *
- * @param character The character to attack.
-   */
-  def attack(character: Enemy): Unit
+
 
   /**
  * Sets the maximum value of the action bar for the character based on its weight.

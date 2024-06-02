@@ -1,6 +1,6 @@
 package model.character
 
-import exceptions.{Require, WeaponNotFoundException}
+import exceptions.{InvalidTargetException, Require, WeaponNotFoundException}
 import model.armory.Weapon
 
 /**
@@ -76,24 +76,34 @@ abstract class ACharacter extends Character {
     }
   }
 
+  override def canBeAttackedBy(character: Character): Boolean = false
+
+  override def canBeAttackedBy(enemy: Enemy): Boolean = true
+
   /**
-   * Attacks the given character, reducing their hit points based on the character's attack power and the target's defense.
+   * Attacks the given target, reducing their hit points based on the character's attack power and the target's defense.
    *
    * If the character has no weapon equipped, a message is printed indicating that the character has no weapon.
    *
-   * @param character The character to attack.
+   * @param target The target to attack.
    */
-  def attack(character: Enemy): Unit = {
-    if (weapon.isDefined) {
-      val damage = weapon.get.getDamage - character.getDefense
-      if (damage > 0) {
-        character.setHp(character.getHp - damage)
+  def attack(target: AGameUnit): Unit = {
+    if(target.canBeAttackedBy(this)){
+      if (weapon.isDefined) {
+        val damage = weapon.get.getDamage - target.getDefense
+        if (damage > 0) {
+          target.setHp(target.getHp - damage)
+        } else {
+          target.setHp(target.getHp)
+        }
       } else {
-        character.setHp(character.getHp)
+        throw new WeaponNotFoundException("This character doesn't have a weapon equipped")
       }
-    } else {
-      throw new WeaponNotFoundException("This character doesn't have a weapon equipped")
+    }else{
+      throw new InvalidTargetException("A Character can only attack Enemy units")
     }
+
+
   }
 
   /**

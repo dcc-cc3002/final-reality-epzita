@@ -42,4 +42,7 @@ trait GameUnit {
    */
   def getDefense: Int
 
+  def canBeAttackedBy(enemy: Enemy): Boolean
+
+  def canBeAttackedBy(character: Character): Boolean
 }
