@@ -77,4 +77,71 @@ class SpellsTest extends FunSuite{
     intercept[InsufficientManaException](noobMage.castSpell(heal, enemy))
 
   }
+
+  //Thunder Spell Tests
+  test("A Thunder spell can be casted by a Black Mage with a Weapon equipped") {
+    blackMage.equipWeapon(staff)
+    val expected_hp = enemy.getHp - staff.getMagicDamage
+    blackMage.castSpell(thunder, enemy)
+    assertEquals(enemy.getHp, expected_hp)
+  }
+
+  test("A Thunder spell cannot be casted by a Black Mage without enough mana") {
+    noobBlackMage.equipWeapon(staff)
+    intercept[InsufficientManaException](noobBlackMage.castSpell(thunder, enemy))
+  }
+
+  test("A Thunder spell cannot be casted without a Weapon") {
+    intercept[WeaponNotFoundException](blackMage.castSpell(thunder, enemy))
+  }
+
+  test("A Thunder spell cannot be casted by a White Mage") {
+    whiteMage.equipWeapon(staff)
+    intercept[Exception](whiteMage.castSpell(thunder, enemy))
+  }
+
+  //Paralize Spell Tests
+
+  test("A Paralize spell can be casted by a White Mage with a Weapon equipped") {
+    whiteMage.equipWeapon(staff)
+    val expected_hp = enemy.getHp - staff.getMagicDamage
+    whiteMage.castSpell(paralize, enemy)
+    assertEquals(enemy.getHp, expected_hp)
+  }
+
+  test("A Paralize spell cannot be casted by a White Mage without enough mana") {
+    noobMage.equipWeapon(staff)
+    intercept[InsufficientManaException](noobMage.castSpell(paralize, enemy))
+  }
+
+  test("A Paralize spell cannot be casted without a Weapon") {
+    intercept[WeaponNotFoundException](whiteMage.castSpell(paralize, enemy))
+  }
+
+  test("A Paralize spell cannot be casted by a Black Mage") {
+    blackMage.equipWeapon(staff)
+    intercept[Exception](blackMage.castSpell(paralize, enemy))
+  }
+
+  //Poison Spell Tests
+  test("A Poison spell can be casted by a White Mage with a Weapon equipped") {
+    whiteMage.equipWeapon(staff)
+    val expected_hp = enemy.getHp - staff.getMagicDamage
+    whiteMage.castSpell(poison, enemy)
+    assertEquals(enemy.getHp, expected_hp)
+  }
+
+  test("A Poison spell cannot be casted by a White Mage without enough mana") {
+    noobMage.equipWeapon(staff)
+    intercept[InsufficientManaException](noobMage.castSpell(poison, enemy))
+  }
+
+  test("A Paralize spell cannot be casted without a Weapon") {
+    intercept[WeaponNotFoundException](whiteMage.castSpell(poison, enemy))
+  }
+
+  test("A Paralize spell cannot be casted by a Black Mage") {
+    blackMage.equipWeapon(staff)
+    intercept[Exception](blackMage.castSpell(poison, enemy))
+  }
 }
