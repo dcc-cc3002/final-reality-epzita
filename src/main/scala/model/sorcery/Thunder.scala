@@ -7,8 +7,8 @@ import model.character.specializations.BlackMage
 class Thunder (override val manaCost: Int = 20) extends DarkSpell {
 
   override def cast(caster: Character, target: GameUnit): Unit = {
-    if (caster.weapon.isDefined) {
-      val damage = caster.weapon.get.getMagicDamage
+    if (caster.hasWeapon) {
+      val damage = caster.getWeapon.get.getMagicDamage
       target.setHp(target.getHp - damage)
     }
     else {

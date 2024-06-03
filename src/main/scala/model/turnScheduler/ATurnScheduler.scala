@@ -59,7 +59,7 @@ abstract class ATurnScheduler extends ITurnScheduler {
    */
   def resetCharacterActionBar(characters: ArrayBuffer[GameUnit]): Unit = {
     for (character <- characters) {
-      character.actionBar = 0
+      character.setActionBar(0)
     }
   }
 
@@ -93,8 +93,8 @@ abstract class ATurnScheduler extends ITurnScheduler {
    */
   def updateCharacterActionBar(k: Int): Unit = {
     for (character <- this.waitList) {
-      character.actionBar += k
-      if (character.actionBar >= character.maxActionBar) {
+      character.setActionBar(character.getActionBar() + k)
+      if (character.getActionBar >= character.getMaxActionBar) {
         this.fightList.addOne(character)
       }
     }

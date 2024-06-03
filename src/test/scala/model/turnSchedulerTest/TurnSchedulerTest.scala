@@ -51,15 +51,15 @@ class TurnSchedulerTest extends FunSuite {
     turnScheduler.setCharacterMaxActionBar(turnScheduler.fightingCharacters)
 
     val warriorExpected = warrior.weight + woodenSword.weight
-    assertEquals(warrior.maxActionBar, warriorExpected)
-    assertEquals(dummy.maxActionBar, dummy.weight)
-    assertEquals(enemy.maxActionBar, enemy.weight)
+    assertEquals(warrior.getMaxActionBar(), warriorExpected)
+    assertEquals(dummy.getMaxActionBar(), dummy.weight)
+    assertEquals(enemy.getMaxActionBar(), enemy.weight)
   }
 
   test("A turn scheduler can access its characters actionBar"){
     turnScheduler.addNewCharacter(warrior)
     //A character's default actionBar is set on 0
-    assertEquals(turnScheduler.fightingCharacters(0).actionBar, 0)
+    assertEquals(turnScheduler.fightingCharacters(0).getActionBar(), 0)
   }
 
 
@@ -74,8 +74,8 @@ class TurnSchedulerTest extends FunSuite {
 
     turnScheduler.resetCharacterActionBar(turnScheduler.waitList)
 
-    assertEquals(turnScheduler.waitList(0).actionBar, 0)
-    assertEquals(turnScheduler.waitList(1).actionBar, 0)
+    assertEquals(turnScheduler.waitList(0).getActionBar(), 0)
+    assertEquals(turnScheduler.waitList(1).getActionBar(), 0)
   }
 
   test("A turn scheduler can add its characters to a waitList before assigning a turn order"){
@@ -95,13 +95,13 @@ class TurnSchedulerTest extends FunSuite {
     turnScheduler.enqueueCharacters()
     turnScheduler.updateCharacterActionBar(5)
 
-    assertEquals(turnScheduler.waitList(0).actionBar, 5)
-    assertEquals(turnScheduler.waitList(1).actionBar, 5)
+    assertEquals(turnScheduler.waitList(0).getActionBar(), 5)
+    assertEquals(turnScheduler.waitList(1).getActionBar(), 5)
 
     turnScheduler.updateCharacterActionBar(2)
 
-    assertEquals(turnScheduler.waitList(0).actionBar, 7)
-    assertEquals(turnScheduler.waitList(1).actionBar, 7)
+    assertEquals(turnScheduler.waitList(0).getActionBar(), 7)
+    assertEquals(turnScheduler.waitList(1).getActionBar(), 7)
   }
 
   test("A turn scheduler can give its character a turn order"){

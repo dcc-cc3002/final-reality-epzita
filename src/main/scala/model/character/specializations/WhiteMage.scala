@@ -1,7 +1,7 @@
 package model.character.specializations
 
 import model.armory.{MagicWeapon, Weapon}
-import model.character.AMagicCharacter
+import model.character.{ACharacter, AMagicCharacter}
 
 /**
  *

@@ -26,12 +26,12 @@ abstract class ACharacter extends Character {
   protected var _weight: Int = Require.Stat(weight, "weigth") atLeast(0)
 
   /** The weapon currently equipped by the character. */
-  var weapon: Option[Weapon] = None
+  protected var weapon: Option[Weapon] = None
 
   /** The maximum value of the action bar for the character. */
-  var maxActionBar: Int = weight
+  protected var maxActionBar: Int = weight
   /** The current value of the action bar for the character. */
-  var actionBar = 0
+  protected var actionBar = 0
 
 
   /**
@@ -75,6 +75,12 @@ abstract class ACharacter extends Character {
       this.maxActionBar = this.weight
     }
   }
+
+  override def getMaxActionBar(): Int = this.maxActionBar
+
+  override def getActionBar(): Int = this.actionBar
+
+  override def setActionBar(actionBar: Int): Unit = this.actionBar = actionBar
 
   override def canBeAttackedBy(character: Character): Boolean = false
 
@@ -130,6 +136,10 @@ abstract class ACharacter extends Character {
    */
   def hasWeapon: Boolean = {
     this.weapon.isDefined
+  }
+
+  def getWeapon: Option[Weapon] = {
+    this.weapon
   }
 }
 

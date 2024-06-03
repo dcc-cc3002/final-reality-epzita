@@ -1,25 +1,15 @@
 package model.character
 
 trait GameUnit {
-  /** The name of the character. */
-  val name: String
-  /** The current hit points of the character. */
-  protected var hp: Int
-  /** The defense power of the character. */
-  protected var defense: Int
-  /** The weight of the character, used for determining the maximum action bar value. */
-  val weight: Int
 
-  /** The maximum value of the action bar for the character. */
-  var maxActionBar: Int
-  /** The current value of the action bar for the character. */
-  var actionBar: Int
-
-
+  def getMaxActionBar(): Int
   /**
    * Sets the maximum value of the action bar for the character based on its weight.
    */
   def setMaxActionBar(): Unit
+
+  def getActionBar(): Int
+  def setActionBar(actionBar: Int)
 
   /**
    * Returns the current hit points of the character.

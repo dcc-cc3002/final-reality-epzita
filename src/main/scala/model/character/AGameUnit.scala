@@ -13,9 +13,9 @@ abstract class AGameUnit extends GameUnit{
   val weight: Int
 
   /** The maximum value of the action bar for the enemy, based on its weight. */
-  var maxActionBar: Int = weight
+  protected var maxActionBar: Int = weight
   /** The current value of the action bar for the enemy. */
-  var actionBar = 0
+  protected var actionBar = 0
 
   /**
    * Returns the current hit points of the enemy.
@@ -39,11 +39,18 @@ abstract class AGameUnit extends GameUnit{
     this.defense
   }
 
+  override def getMaxActionBar(): Int = this.maxActionBar
   /**
    * Sets the maximum value of the action bar for the enemy based on its weight.
    */
-  override def setMaxActionBar(): Unit = {
-    this.maxActionBar = this.weight
+  def setMaxActionBar(): Unit = {
+    this.actionBar = this.weight
+  }
+
+  override def getActionBar(): Int = this.actionBar
+
+  override def setActionBar(actionBar: Int): Unit = {
+    this.actionBar = actionBar
   }
 
   /**

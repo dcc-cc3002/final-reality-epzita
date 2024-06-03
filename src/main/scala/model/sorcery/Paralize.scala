@@ -6,8 +6,8 @@ import model.character.specializations.WhiteMage
 
 class Paralize(override val manaCost: Int = 25) extends LightSpell {
   override def cast(caster: Character, target: GameUnit): Unit = {
-    if (caster.weapon.isDefined) {
-      val damage = caster.weapon.get.getMagicDamage
+    if (caster.hasWeapon) {
+      val damage = caster.getWeapon.get.getMagicDamage
       target.setHp(target.getHp - damage)
     }
     else {
