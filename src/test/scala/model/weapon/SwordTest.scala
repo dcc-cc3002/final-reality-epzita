@@ -1,4 +1,4 @@
-package model.weaponTest
+package model.weapon
 
 import exceptions.InvalidStatException
 import model.armory.Sword

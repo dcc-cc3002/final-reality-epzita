@@ -1,9 +1,9 @@
-package model.turnSchedulerTest
+package model.turnscheduler
 
 import model.armory.Sword
 import model.character.Enemy
 import model.character.specializations.{Paladin, Warrior}
-import model.turnScheduler.TurnScheduler
+import model.turnscheduler.TurnScheduler
 import munit.FunSuite
 
 import scala.collection.mutable.ArrayBuffer

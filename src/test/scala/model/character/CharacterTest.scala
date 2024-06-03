@@ -1,4 +1,4 @@
-package model.characterTest
+package model.character
 
 import exceptions.{InvalidStatException, WeaponNotFoundException}
 import model.armory.Sword

@@ -1,4 +1,4 @@
-package model.turnScheduler
+package model.turnscheduler
 
 import model.character.{Character, GameUnit}
 

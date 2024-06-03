@@ -1,4 +1,4 @@
-package model.characterTest
+package model.character
 
 import exceptions.{InsufficientManaException, WeaponNotFoundException}
 import model.armory.Staff

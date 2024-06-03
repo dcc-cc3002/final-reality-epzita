@@ -1,4 +1,4 @@
-package model.weaponTest
+package model.weapon
 
 import model.armory.Wand
 import model.character.specializations.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}

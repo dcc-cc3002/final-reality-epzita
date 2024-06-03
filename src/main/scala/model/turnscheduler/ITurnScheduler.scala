@@ -1,4 +1,4 @@
-package model.turnScheduler
+package model.turnscheduler
 
 import scala.collection.mutable.ArrayBuffer
 import model.character.{Character, GameUnit}

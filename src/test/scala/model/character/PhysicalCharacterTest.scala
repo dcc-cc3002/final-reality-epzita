@@ -1,4 +1,4 @@
-package model.characterTest
+package model.character
 
 import model.armory.Sword
 import model.character.specializations.Ninja

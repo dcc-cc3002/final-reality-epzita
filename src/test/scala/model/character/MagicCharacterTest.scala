@@ -1,4 +1,4 @@
-package model.characterTest
+package model.character
 
 import model.armory.Staff
 import model.character.specializations.WhiteMage

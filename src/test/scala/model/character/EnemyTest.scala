@@ -1,4 +1,4 @@
-package model.characterTest
+package model.character
 
 import model.character.Enemy
 import model.character.specializations.Paladin

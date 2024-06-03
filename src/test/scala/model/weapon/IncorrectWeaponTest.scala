@@ -1,4 +1,4 @@
-package model.weaponTest
+package model.weapon
 
 import model.armory.{Axe, Staff, Sword}
 import model.character.specializations.{Ninja, Paladin, WhiteMage}

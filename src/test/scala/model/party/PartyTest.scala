@@ -1,4 +1,4 @@
-package model.partyTest
+package model.party
 
 import model.character.specializations._
 import model.character.specializations.{BlackMage, Ninja, Paladin, Warrior, WhiteMage}
