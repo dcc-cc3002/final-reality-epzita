@@ -99,6 +99,8 @@ abstract class ATurnScheduler extends ITurnScheduler {
       }
     }
     this.cleanWaitList()
+    //We notice the final order for the fightList can be obtained by ordering all the fighting units by their maxActionBar
+    this.fightList.sortBy(_.getMaxActionBar())
   }
 
   /**
