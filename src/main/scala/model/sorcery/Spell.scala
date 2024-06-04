@@ -8,6 +8,7 @@ trait Spell {
   val manaCost: Int
   def canBeCastBy(caster: MagicCharacter): Boolean
   def cast(caster: Character, target: GameUnit): Unit
+  def isTargetDead(target: GameUnit): Boolean
 
 
 

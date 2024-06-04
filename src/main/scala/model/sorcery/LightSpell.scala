@@ -9,4 +9,5 @@ trait LightSpell extends Spell {
   override def canBeCastBy(caster: MagicCharacter): Boolean = {
     caster.canCastLightSpell
   }
+  override def isTargetDead(target: GameUnit): Boolean = target.getHp == 0
 }

@@ -1,5 +1,5 @@
 package model.sorcery
-import exceptions.WeaponNotFoundException
+import exceptions.{DeadUnitException, WeaponNotFoundException}
 import model.character.Character
 import model.character.GameUnit
 
@@ -7,6 +7,9 @@ import model.character.GameUnit
 class Fire (override val manaCost: Int = 15) extends DarkSpell {
 
   override def cast(caster: Character, target: GameUnit): Unit = {
+    if(isTargetDead(target)){
+      throw new DeadUnitException("This Unit is already dead")
+    }
     if (caster.hasWeapon) {
       val damage = caster.getWeapon.get.getMagicDamage
       target.setHp(target.getHp - damage)

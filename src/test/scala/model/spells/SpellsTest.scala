@@ -1,6 +1,6 @@
 package model.character
 
-import exceptions.{InsufficientManaException, WeaponNotFoundException}
+import exceptions.{DeadUnitException, InsufficientManaException, WeaponNotFoundException}
 import model.armory.Staff
 import model.character.Enemy
 import model.character.specializations.{BlackMage, WhiteMage}
@@ -13,9 +13,11 @@ class SpellsTest extends FunSuite{
   var blackMage: BlackMage = _
   var noobMage: WhiteMage = _
   var noobBlackMage: BlackMage = _
-  //weapons
+  //weapons & targets
   var staff: Staff = _
   var enemy: Enemy = _
+  var deadEnemy: Enemy = _
+  var deadMage: WhiteMage = _
   //spells
   var fire: Fire = _
   var heal: Heal = _
@@ -31,6 +33,8 @@ class SpellsTest extends FunSuite{
 
     staff = new Staff("Stick", 10, 10,10,10)
     enemy = new Enemy("Sauron", 100, 10, 10, 10)
+    deadEnemy = new Enemy("Dead", 0,1,1,1)
+    deadMage = new WhiteMage("Dead Mage",0,1,1,1)
     fire = new Fire()
     heal = new Heal()
     thunder = new Thunder()
@@ -60,6 +64,10 @@ class SpellsTest extends FunSuite{
     whiteMage.equipWeapon(staff)
     intercept[Exception](whiteMage.castSpell(fire, enemy))
   }
+  test("A Fire spell cannot be casted upon a dead Unit"){
+    blackMage.equipWeapon(staff)
+    intercept[DeadUnitException](blackMage.castSpell(fire,deadEnemy))
+  }
 
   //Heal Spell Tests
 
@@ -75,7 +83,11 @@ class SpellsTest extends FunSuite{
 
   test("A spell cannot be casted by a Mage with insufficient mana"){
     intercept[InsufficientManaException](noobMage.castSpell(heal, enemy))
+  }
 
+  test("A Heal spell cannot be casted upon a dead Unit") {
+    whiteMage.equipWeapon(staff)
+    intercept[DeadUnitException](whiteMage.castSpell(heal, deadMage))
   }
 
   //Thunder Spell Tests
@@ -98,6 +110,11 @@ class SpellsTest extends FunSuite{
   test("A Thunder spell cannot be casted by a White Mage") {
     whiteMage.equipWeapon(staff)
     intercept[Exception](whiteMage.castSpell(thunder, enemy))
+  }
+
+  test("A Thunder spell cannot be casted upon a dead Unit") {
+    blackMage.equipWeapon(staff)
+    intercept[DeadUnitException](blackMage.castSpell(thunder, deadEnemy))
   }
 
   //Paralize Spell Tests
@@ -123,6 +140,11 @@ class SpellsTest extends FunSuite{
     intercept[Exception](blackMage.castSpell(paralize, enemy))
   }
 
+  test("A Paralize spell cannot be casted upon a dead Unit") {
+    whiteMage.equipWeapon(staff)
+    intercept[DeadUnitException](whiteMage.castSpell(paralize, deadEnemy))
+  }
+
   //Poison Spell Tests
   test("A Poison spell can be casted by a White Mage with a Weapon equipped") {
     whiteMage.equipWeapon(staff)
@@ -136,12 +158,16 @@ class SpellsTest extends FunSuite{
     intercept[InsufficientManaException](noobMage.castSpell(poison, enemy))
   }
 
-  test("A Paralize spell cannot be casted without a Weapon") {
+  test("A Poison spell cannot be casted without a Weapon") {
     intercept[WeaponNotFoundException](whiteMage.castSpell(poison, enemy))
   }
 
-  test("A Paralize spell cannot be casted by a Black Mage") {
+  test("A Poison spell cannot be casted by a Black Mage") {
     blackMage.equipWeapon(staff)
     intercept[Exception](blackMage.castSpell(poison, enemy))
+  }
+  test("A Poison spell cannot be casted upon a dead Unit") {
+    whiteMage.equipWeapon(staff)
+    intercept[DeadUnitException](whiteMage.castSpell(poison, deadEnemy))
   }
 }

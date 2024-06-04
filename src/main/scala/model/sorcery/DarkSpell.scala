@@ -6,11 +6,11 @@ import model.character.specializations.{BlackMage, WhiteMage}
 trait DarkSpell extends Spell {
 
   val manaCost: Int
-
-  override def cast(caster: Character, target: GameUnit): Unit
   override def canBeCastBy(caster: MagicCharacter): Boolean = {
     caster.canCastDarkSpell
   }
+
+  override def isTargetDead(target: GameUnit): Boolean = target.getHp == 0
 
 }
 
