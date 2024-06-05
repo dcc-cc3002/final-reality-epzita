@@ -1,6 +1,6 @@
 package model.sorcery
 
-import exceptions.{DeadUnitException, InvalidTargetException, WeaponNotFoundException}
+import exceptions.{DeadUnitException, InvalidTargetException, InvalidWeaponException, WeaponNotFoundException}
 import model.character.{Character, Enemy, GameUnit}
 import model.character.specializations.BlackMage
 
@@ -14,8 +14,13 @@ class Thunder (override val manaCost: Int = 20) extends DarkSpell with DamageSpe
       throw new DeadUnitException("This Unit is already dead")
     }
     if (caster.hasWeapon) {
-      val damage = caster.getWeapon.get.getMagicDamage
-      target.setHp(target.getHp - damage)
+      if (caster.getWeapon.get.hasMagicDamage) {
+        val damage = caster.getWeapon.get.getMagicDamage
+        target.setHp(target.getHp - damage)
+      }
+      else {
+        throw new InvalidWeaponException("A Mage needs a to equip Magic Weapon to cast a spell")
+      }
     }
     else {
       throw new WeaponNotFoundException("The caster needs to have a Weapon equipped to cast this spell")

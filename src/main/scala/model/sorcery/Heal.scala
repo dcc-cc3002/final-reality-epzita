@@ -1,8 +1,7 @@
 package model.sorcery
 
-import exceptions.{DeadUnitException, InvalidTargetException}
-import model.character.{Character, Enemy, GameUnit}
-import model.character.specializations.WhiteMage
+import exceptions.{DeadUnitException, InvalidTargetException, InvalidWeaponException, WeaponNotFoundException}
+import model.character.{Character, GameUnit}
 
 class Heal(override val manaCost: Int = 15) extends LightSpell with BuffSpell {
 
@@ -13,8 +12,17 @@ class Heal(override val manaCost: Int = 15) extends LightSpell with BuffSpell {
     if (isTargetDead(target)) {
       throw new DeadUnitException("This Unit is already dead")
     }
-    val heal_amount = (target.getHp*0.3).toInt
-    target.setHp(target.getHp + heal_amount)
+    if (caster.hasWeapon) {
+      if (caster.getWeapon.get.hasMagicDamage) {
+        val heal_amount = (target.getHp * 0.3).toInt
+        target.setHp(target.getHp + heal_amount)
+      }
+      else {
+        throw new InvalidWeaponException("A Mage needs a to equip Magic Weapon to cast a spell")
+      }
+    }
+    else{
+       throw new WeaponNotFoundException("The caster needs to have a Weapon equipped to cast this spell")
+    }
   }
-
 }

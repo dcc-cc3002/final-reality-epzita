@@ -1,7 +1,7 @@
 package model.character
 
-import exceptions.{DeadUnitException, InsufficientManaException, InvalidTargetException, WeaponNotFoundException}
-import model.armory.Staff
+import exceptions.{DeadUnitException, InsufficientManaException, InvalidTargetException, InvalidWeaponException, WeaponNotFoundException}
+import model.armory.{Bow, Staff, Sword}
 import model.character.Enemy
 import model.character.specializations.{BlackMage, WhiteMage}
 import model.sorcery.{Fire, Heal, Paralize, Poison, Thunder}
@@ -15,6 +15,8 @@ class SpellsTest extends FunSuite{
   var noobBlackMage: BlackMage = _
   //weapons & targets
   var staff: Staff = _
+  var sword: Sword = _
+  var bow: Bow = _
   var enemy: Enemy = _
   var deadEnemy: Enemy = _
   var deadMage: WhiteMage = _
@@ -32,9 +34,12 @@ class SpellsTest extends FunSuite{
     noobBlackMage = new BlackMage("Bad Potat", 10, 10, 10, 1)
 
     staff = new Staff("Stick", 10, 10,10,10)
+    sword = new Sword("Excalibur", 10, 10, 10)
+    bow = new Bow("Bow", 10,10,10)
     enemy = new Enemy("Sauron", 100, 10, 10, 10)
     deadEnemy = new Enemy("Dead", 0,1,1,1)
     deadMage = new WhiteMage("Dead Mage",0,1,1,1)
+
     fire = new Fire()
     heal = new Heal()
     thunder = new Thunder()
@@ -74,9 +79,15 @@ class SpellsTest extends FunSuite{
     intercept[InvalidTargetException](blackMage.castSpell(fire, whiteMage))
   }
 
+  test("A Fire spell cannot be casted without a Magic Weapon equipped") {
+    blackMage.equipWeapon(sword)
+    intercept[InvalidWeaponException](blackMage.castSpell(fire, enemy))
+  }
+
   //Heal Spell Tests
 
   test("A Heal spell can be casted by a White Mage"){
+    whiteMage.equipWeapon(staff)
     whiteMage.castSpell(heal, noobMage)
     val expected_hp = 13
     assertEquals(noobMage.getHp,expected_hp)
@@ -98,6 +109,11 @@ class SpellsTest extends FunSuite{
   test("A BuffSpell cannot be casted upon an Enemy Unit"){
     whiteMage.equipWeapon(staff)
     intercept[InvalidTargetException](whiteMage.castSpell(heal,enemy))
+  }
+
+  test("A Heal spell cannot be casted without a Magic Weapon equipped") {
+    whiteMage.equipWeapon(bow)
+    intercept[InvalidWeaponException](whiteMage.castSpell(heal, blackMage))
   }
 
   //Thunder Spell Tests
@@ -131,6 +147,10 @@ class SpellsTest extends FunSuite{
     blackMage.equipWeapon(staff)
     intercept[InvalidTargetException](blackMage.castSpell(thunder,whiteMage))
   }
+  test("A Thunder spell cannot be casted without a Magic Weapon equipped") {
+    blackMage.equipWeapon(sword)
+    intercept[InvalidWeaponException](blackMage.castSpell(thunder, enemy))
+  }
 
   //Paralize Spell Tests
 
@@ -163,6 +183,10 @@ class SpellsTest extends FunSuite{
     whiteMage.equipWeapon(staff)
     intercept[InvalidTargetException](whiteMage.castSpell(paralize, blackMage))
   }
+  test("A Paralize spell cannot be casted without a Magic Weapon equipped") {
+    whiteMage.equipWeapon(bow)
+    intercept[InvalidWeaponException](whiteMage.castSpell(paralize, enemy))
+  }
 
   //Poison Spell Tests
   test("A Poison spell can be casted by a White Mage with a Weapon equipped") {
@@ -192,5 +216,9 @@ class SpellsTest extends FunSuite{
   test("A Poison spell cannot be casted upon an ally Unit") {
     whiteMage.equipWeapon(staff)
     intercept[InvalidTargetException](whiteMage.castSpell(poison, blackMage))
+  }
+  test("A Poison spell cannot be casted without a Magic Weapon equipped"){
+    whiteMage.equipWeapon(bow)
+    intercept[InvalidWeaponException](whiteMage.castSpell(poison, enemy))
   }
 }

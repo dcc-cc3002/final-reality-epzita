@@ -55,6 +55,8 @@ abstract class PhysicalWeapon extends Weapon {
     this.damage = this.damage + num
   }
 
+  def hasMagicDamage: Boolean = false
+
   /**
    * Increases the damage of the weapon by 2, simulating sharpening the weapon.
    */

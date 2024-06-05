@@ -43,6 +43,7 @@ trait Weapon {
    * @return The defense power of the weapon.
    */
   def getDefense: Int
+  def hasMagicDamage: Boolean
   def getMagicDamage: Int
 
 }

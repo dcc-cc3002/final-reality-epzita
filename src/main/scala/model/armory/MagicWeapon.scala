@@ -9,7 +9,7 @@ import model.character.{ACharacter, AMagicCharacter, Character}
  *
  * This class extends Weapon and adds a magic damage parameter to the weapon.
  */
-abstract class MagicWeapon extends Weapon {
+abstract class MagicWeapon extends Weapon with IMagicWeapon {
   /** The name of the weapon. */
   val name: String
   /** The base damage inflicted by the weapon. */
@@ -67,6 +67,8 @@ abstract class MagicWeapon extends Weapon {
   def setMagicDamage(num: Int): Unit = {
     this.magicDamage = this.magicDamage + num
   }
+
+  def hasMagicDamage: Boolean = true
 
   /**
    * Increases the magic damage of the weapon by 2, enhancing the weapon's magical capabilities.
