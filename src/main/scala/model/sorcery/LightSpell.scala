@@ -3,10 +3,11 @@ package model.sorcery
 import model.character.{GameUnit, MagicCharacter}
 import model.character.specializations.{BlackMage, WhiteMage}
 
-trait LightSpell extends Spell {
+abstract class LightSpell extends Spell {
+
 
   val manaCost: Int
-  override def canBeCastBy(caster: MagicCharacter): Boolean = {
+  def canBeCastBy(caster: MagicCharacter): Boolean = {
     caster.canCastLightSpell
   }
   override def isTargetDead(target: GameUnit): Boolean = target.getHp == 0

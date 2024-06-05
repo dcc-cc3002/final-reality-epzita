@@ -11,6 +11,10 @@ abstract class AEnemy extends AGameUnit {
   def canBeAttackedBy(enemy: Enemy): Boolean = false
   def canBeAttackedBy(character: Character): Boolean = true
 
+  def isHealeable: Boolean = false
+
+  def isDamageable: Boolean = true
+
 
   /** The attack power of the enemy. */
   var attack: Int

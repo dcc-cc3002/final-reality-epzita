@@ -86,6 +86,10 @@ abstract class ACharacter extends Character {
 
   override def canBeAttackedBy(enemy: Enemy): Boolean = true
 
+  def isHealeable: Boolean = true
+
+  def isDamageable: Boolean = false
+
   /**
    * Attacks the given target, reducing their hit points based on the character's attack power and the target's defense.
    *

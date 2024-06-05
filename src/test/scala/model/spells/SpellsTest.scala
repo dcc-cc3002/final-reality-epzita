@@ -1,6 +1,6 @@
 package model.character
 
-import exceptions.{DeadUnitException, InsufficientManaException, WeaponNotFoundException}
+import exceptions.{DeadUnitException, InsufficientManaException, InvalidTargetException, WeaponNotFoundException}
 import model.armory.Staff
 import model.character.Enemy
 import model.character.specializations.{BlackMage, WhiteMage}
@@ -69,12 +69,17 @@ class SpellsTest extends FunSuite{
     intercept[DeadUnitException](blackMage.castSpell(fire,deadEnemy))
   }
 
+  test("A Fire spell cannot be casted upon an ally Unit") {
+    blackMage.equipWeapon(staff)
+    intercept[InvalidTargetException](blackMage.castSpell(fire, whiteMage))
+  }
+
   //Heal Spell Tests
 
   test("A Heal spell can be casted by a White Mage"){
-    whiteMage.castSpell(heal, enemy)
-    val expected_hp = 130
-    assertEquals(enemy.getHp,130)
+    whiteMage.castSpell(heal, noobMage)
+    val expected_hp = 13
+    assertEquals(noobMage.getHp,expected_hp)
   }
 
   test("A heal spell cannot be casted by a Black Mage"){
@@ -88,6 +93,11 @@ class SpellsTest extends FunSuite{
   test("A Heal spell cannot be casted upon a dead Unit") {
     whiteMage.equipWeapon(staff)
     intercept[DeadUnitException](whiteMage.castSpell(heal, deadMage))
+  }
+
+  test("A BuffSpell cannot be casted upon an Enemy Unit"){
+    whiteMage.equipWeapon(staff)
+    intercept[InvalidTargetException](whiteMage.castSpell(heal,enemy))
   }
 
   //Thunder Spell Tests
@@ -117,6 +127,11 @@ class SpellsTest extends FunSuite{
     intercept[DeadUnitException](blackMage.castSpell(thunder, deadEnemy))
   }
 
+  test("A Thunder spell cannot be casted upon an ally Unit"){
+    blackMage.equipWeapon(staff)
+    intercept[InvalidTargetException](blackMage.castSpell(thunder,whiteMage))
+  }
+
   //Paralize Spell Tests
 
   test("A Paralize spell can be casted by a White Mage with a Weapon equipped") {
@@ -144,6 +159,10 @@ class SpellsTest extends FunSuite{
     whiteMage.equipWeapon(staff)
     intercept[DeadUnitException](whiteMage.castSpell(paralize, deadEnemy))
   }
+  test("A Paralize spell cannot be casted upon an ally Unit") {
+    whiteMage.equipWeapon(staff)
+    intercept[InvalidTargetException](whiteMage.castSpell(paralize, blackMage))
+  }
 
   //Poison Spell Tests
   test("A Poison spell can be casted by a White Mage with a Weapon equipped") {
@@ -169,5 +188,9 @@ class SpellsTest extends FunSuite{
   test("A Poison spell cannot be casted upon a dead Unit") {
     whiteMage.equipWeapon(staff)
     intercept[DeadUnitException](whiteMage.castSpell(poison, deadEnemy))
+  }
+  test("A Poison spell cannot be casted upon an ally Unit") {
+    whiteMage.equipWeapon(staff)
+    intercept[InvalidTargetException](whiteMage.castSpell(poison, blackMage))
   }
 }

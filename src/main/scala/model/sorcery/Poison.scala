@@ -1,10 +1,13 @@
 package model.sorcery
 
-import exceptions.{DeadUnitException, WeaponNotFoundException}
-import model.character.{Character, GameUnit}
+import exceptions.{DeadUnitException, InvalidTargetException, WeaponNotFoundException}
+import model.character.{Character, Enemy, GameUnit}
 
-class Poison(override val manaCost: Int = 30) extends LightSpell {
-  override def cast(caster: Character, target: GameUnit): Unit = {
+class Poison(override val manaCost: Int = 30) extends LightSpell with DamageSpell {
+  def cast(caster: Character, target: GameUnit): Unit = {
+    if (!this.canBeCastedUpon(target)) {
+      throw new InvalidTargetException("This spell cannot be casted upon an ally")
+    }
     if (isTargetDead(target)) {
       throw new DeadUnitException("This Unit is already dead")
     }

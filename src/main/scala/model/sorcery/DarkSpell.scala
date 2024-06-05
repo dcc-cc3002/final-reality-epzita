@@ -1,15 +1,13 @@
 package model.sorcery
 
-import model.character.{GameUnit, MagicCharacter, Character}
-import model.character.specializations.{BlackMage, WhiteMage}
+import model.character.{GameUnit, MagicCharacter}
 
-trait DarkSpell extends Spell {
+abstract class DarkSpell extends Spell {
 
   val manaCost: Int
-  override def canBeCastBy(caster: MagicCharacter): Boolean = {
+  def canBeCastBy(caster: MagicCharacter): Boolean = {
     caster.canCastDarkSpell
   }
-
   override def isTargetDead(target: GameUnit): Boolean = target.getHp == 0
 
 }

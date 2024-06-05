@@ -35,4 +35,7 @@ trait GameUnit {
   def canBeAttackedBy(enemy: Enemy): Boolean
 
   def canBeAttackedBy(character: Character): Boolean
+
+  def isHealeable: Boolean
+  def isDamageable: Boolean
 }

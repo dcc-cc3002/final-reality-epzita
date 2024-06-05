@@ -2,7 +2,7 @@ package model.character
 
 import exceptions.{InsufficientManaException, InvalidSpellException}
 import model.armory.Weapon
-import model.sorcery.Spell
+import model.sorcery.{BuffSpell, DamageSpell, Spell}
 
 
 /**
@@ -50,5 +50,4 @@ abstract class AMagicCharacter extends ACharacter with MagicCharacter {
       throw new InvalidSpellException("This Mage can't cast this kind of Magic")
     }
   }
-
 }

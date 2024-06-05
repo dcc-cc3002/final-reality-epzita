@@ -1,12 +1,15 @@
 package model.sorcery
 
-import exceptions.{DeadUnitException, WeaponNotFoundException}
-import model.character.{Character, GameUnit}
+import exceptions.{DeadUnitException, InvalidTargetException, WeaponNotFoundException}
+import model.character.{Character, Enemy, GameUnit}
 import model.character.specializations.BlackMage
 
-class Thunder (override val manaCost: Int = 20) extends DarkSpell {
+class Thunder (override val manaCost: Int = 20) extends DarkSpell with DamageSpell{
 
-  override def cast(caster: Character, target: GameUnit): Unit = {
+  def cast(caster: Character, target: GameUnit): Unit = {
+    if (!this.canBeCastedUpon(target)) {
+      throw new InvalidTargetException("This spell cannot be casted upon an ally")
+    }
     if (isTargetDead(target)) {
       throw new DeadUnitException("This Unit is already dead")
     }
@@ -17,7 +20,6 @@ class Thunder (override val manaCost: Int = 20) extends DarkSpell {
     else {
       throw new WeaponNotFoundException("The caster needs to have a Weapon equipped to cast this spell")
     }
-
   }
 
 }
