@@ -9,12 +9,6 @@ import model.character.{Character, GameUnit}
  * This trait works with lists of characters to ensure a correct turn order.
  */
 trait ITurnScheduler {
-  /** The list of characters currently in the fight. */
-  val fightingCharacters: ArrayBuffer[GameUnit]
-  /** The list of characters waiting for their turn. */
-  val waitList: ArrayBuffer[GameUnit]
-  /** The list of characters scheduled to fight. */
-  val fightList: ArrayBuffer[GameUnit]
 
   /**
    * Adds a new character to the scheduler.
