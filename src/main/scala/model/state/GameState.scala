@@ -1,5 +1,5 @@
 package model.state
 
-class GameState(val context: GameController) {
+class GameState(val context: GameController) extends GameState(context){
 
 }
