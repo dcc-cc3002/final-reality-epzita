@@ -16,4 +16,6 @@ trait Character extends GameUnit {
   def canCastLightSpell: Boolean = false
   def canCastDarkSpell: Boolean = false
 
+  def equipWeapon(weapon:Weapon): Unit
+
 }

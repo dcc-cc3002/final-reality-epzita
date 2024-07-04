@@ -97,7 +97,7 @@ abstract class ACharacter extends Character {
    *
    * @param target The target to attack.
    */
-  def attack(target: AGameUnit): Unit = {
+  def attack(target: GameUnit): Unit = {
     if(target.canBeAttackedBy(this)){
       if (weapon.isDefined) {
         val damage = weapon.get.getDamage - target.getDefense
