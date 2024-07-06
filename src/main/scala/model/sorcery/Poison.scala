@@ -3,6 +3,8 @@ package model.sorcery
 import exceptions.{DeadUnitException, InvalidTargetException, InvalidWeaponException, WeaponNotFoundException}
 import model.character.{Character, Enemy, GameUnit}
 
+import scala.util.Random
+
 class Poison(override val manaCost: Int = 30) extends LightSpell with DamageSpell {
   def cast(caster: Character, target: GameUnit): Unit = {
     if (!this.canBeCastedUpon(target)) {
@@ -15,6 +17,10 @@ class Poison(override val manaCost: Int = 30) extends LightSpell with DamageSpel
       if(caster.getWeapon.get.hasMagicDamage){
         val damage = caster.getWeapon.get.getMagicDamage
         target.setHp(target.getHp - damage)
+        val probability = Random.between(1, 101)
+        if (probability >= 80) {
+          target.getEffectHandler.setPoisonTurnsLeft(4)
+        }
       }
       else{
         throw new InvalidWeaponException("A Mage needs a to equip Magic Weapon to cast a spell")
