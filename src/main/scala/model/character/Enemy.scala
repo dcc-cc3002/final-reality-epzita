@@ -1,6 +1,7 @@
 package model.character
 
 import exceptions.InvalidTargetException
+import model.effects.EffectHandler
 
 /**
  *
@@ -24,4 +25,7 @@ class Enemy(val name: String, protected var hp: Int,
     }
   }
 
+  val effectHandler: EffectHandler = new EffectHandler(this)
+
+  override def getEffectHandler: EffectHandler = this.effectHandler
 }

@@ -2,6 +2,7 @@ package model.character
 
 import exceptions.{InvalidTargetException, Require, WeaponNotFoundException}
 import model.armory.Weapon
+import model.effects.EffectHandler
 
 /**
  * Abstract class defining a character in a role-playing game.
@@ -145,6 +146,8 @@ abstract class ACharacter extends Character {
   def getWeapon: Option[Weapon] = {
     this.weapon
   }
+
+  override def getEffectHandler: EffectHandler = new EffectHandler(this)
 }
 
 

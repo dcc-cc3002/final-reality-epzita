@@ -2,6 +2,8 @@ package model.sorcery
 import exceptions.{DeadUnitException, InvalidTargetException, InvalidWeaponException, WeaponNotFoundException}
 import model.character.{Character, Enemy, GameUnit}
 
+import scala.util.Random
+
 
 class Fire (override val manaCost: Int = 15) extends DarkSpell with DamageSpell  {
    def cast(caster: Character, target: GameUnit): Unit = {
@@ -15,6 +17,10 @@ class Fire (override val manaCost: Int = 15) extends DarkSpell with DamageSpell 
       if (caster.getWeapon.get.hasMagicDamage) {
         val damage = caster.getWeapon.get.getMagicDamage
         target.setHp(target.getHp - damage)
+        val probability = Random.between(1,101)
+        if(probability >=80){
+          target.getEffectHandler.setBurnedTurnsLeft(3)
+        }
       }
       else {
         throw new InvalidWeaponException("A Mage needs a to equip Magic Weapon to cast a spell")

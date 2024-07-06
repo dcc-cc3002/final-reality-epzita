@@ -1,5 +1,7 @@
 package model.character
 
+import model.effects.EffectHandler
+
 trait GameUnit {
 
   def getMaxActionBar(): Int
@@ -39,4 +41,5 @@ trait GameUnit {
 
   def isHealeable: Boolean
   def isDamageable: Boolean
+  def getEffectHandler: EffectHandler
 }
