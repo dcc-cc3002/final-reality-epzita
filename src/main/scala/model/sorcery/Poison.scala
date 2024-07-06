@@ -20,6 +20,7 @@ class Poison(override val manaCost: Int = 30) extends LightSpell with DamageSpel
         val probability = Random.between(1, 101)
         if (probability >= 80) {
           target.getEffectHandler.setPoisonTurnsLeft(4)
+          target.getEffectHandler.setPoisonDamage(damage/3)
         }
       }
       else{

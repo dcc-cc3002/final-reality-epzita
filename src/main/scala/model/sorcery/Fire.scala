@@ -20,6 +20,7 @@ class Fire (override val manaCost: Int = 15) extends DarkSpell with DamageSpell 
         val probability = Random.between(1,101)
         if(probability >=80){
           target.getEffectHandler.setBurnedTurnsLeft(3)
+          target.getEffectHandler.setBurnDamage(damage/2)
         }
       }
       else {
