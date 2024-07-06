@@ -4,6 +4,7 @@ import model.armory.Weapon
 import model.character.{Character, Enemy, GameUnit, MagicCharacter}
 import model.party.Party
 import model.sorcery.Spell
+import model.turnscheduler.TurnScheduler
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -12,6 +13,7 @@ class GameController {
   //game state starts as Pre Game
   var state: GameState = new PreGame(this)
   val gameCharacters = new ArrayBuffer[GameUnit]
+  val turnScheduler = new TurnScheduler
 
   def startGame(players: ArrayBuffer[Character], enemies: ArrayBuffer[Enemy]): Unit = {
      val party = new Party()
@@ -20,10 +22,20 @@ class GameController {
      }
      gameCharacters++= players
      gameCharacters++= enemies
+     for(character <- gameCharacters){
+       turnScheduler.addNewCharacter(character)
+     }
      //game state is set to In Game
      state = new InGame(this)
   }
-  def unitAttack(attacker: GameUnit, target: GameUnit): Unit = attacker.attack(target)
+  def unitAttack(attacker: GameUnit, target: GameUnit): Unit = {
+    if(turnScheduler.turnCharacter == attacker){
+      attacker.attack(target)
+    }
+    else{
+      throw new Exception("This isn't this unit's turn")
+    }
+  }
   def mageCast(spell: Spell, caster: MagicCharacter, target: Enemy) = caster.castSpell(spell, target)
   def playerEquipWeapon(player: Character, weapon: Weapon) = player.equipWeapon(weapon)
 
