@@ -195,6 +195,16 @@ class SpellsTest extends FunSuite{
     assertEquals(enemy.getHp, expected_hp)
   }
 
+  test("A Poison spell poisons the target") {
+    whiteMage.equipWeapon(staff)
+    whiteMage.castSpell(poison, enemy)
+    val expected_poison_damage = staff.getMagicDamage / 3
+    assert(enemy.getEffectHandler.isPoisoned, true)
+    assertEquals(enemy.getEffectHandler.getPoisonDamage, expected_poison_damage)
+  }
+
+
+
   test("A Poison spell cannot be casted by a White Mage without enough mana") {
     noobMage.equipWeapon(staff)
     intercept[InsufficientManaException](noobMage.castSpell(poison, enemy))
