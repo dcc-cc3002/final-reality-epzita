@@ -49,7 +49,9 @@ class GameController {
 
   def passTurn(turnUnit: GameUnit): Unit = {
     val index = turnScheduler.fightList.indexOf(turnUnit)
-    val turnCharacter = turnScheduler.fightList[]
+    if(turnScheduler.fightList.length >= index + 1){
+      val turnCharacter = turnScheduler.fightList(index + 1)
+    }
     turnScheduler.setTurnCharacter()
   }
   def playerEquipWeapon(player: Character, weapon: Weapon) = player.equipWeapon(weapon)
