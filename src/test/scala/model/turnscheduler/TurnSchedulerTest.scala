@@ -126,7 +126,7 @@ class TurnSchedulerTest extends FunSuite {
 
     turnScheduler.enqueueCharacters()
     turnScheduler.updateCharacterActionBar(30)
-    turnScheduler.setTurnCharacter()
+    turnScheduler.setTurnCharacter(0)
 
     assertEquals(turnScheduler.turnCharacter, warrior)
   }

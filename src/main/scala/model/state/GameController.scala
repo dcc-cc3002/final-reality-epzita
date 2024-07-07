@@ -50,14 +50,21 @@ class GameController {
     val index = turnScheduler.fightList.indexOf(turnUnit)
     if(turnScheduler.fightList.length >= index + 1){
       val turnCharacter = turnScheduler.fightList(index + 1)
+      turnScheduler.setTurnCharacter(index+1)
     }
-    turnScheduler.setTurnCharacter()
+
   }
   def playerEquipWeapon(player: Character, weapon: Weapon): Unit = player.equipWeapon(weapon)
 
   def win: Boolean = enemies.length == 0
 
   def lose: Boolean = party.isDefeated
+
+  def endGame(): Unit ={
+    if(win || lose){
+      state = new EndGame(this)
+    }
+  }
 
 }
 

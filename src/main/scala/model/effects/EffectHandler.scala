@@ -117,4 +117,13 @@ class EffectHandler(affected: GameUnit) {
    * @return true if the character is paralyzed, false otherwise.
    */
   def isParalized: Boolean = getParalizedTurnsLeft > 0
+  def applyEfects(): Unit = {
+    if(isBurned){
+      affected.setHp(affected.getHp-burnDamage)
+    }
+    if(isPoisoned){
+      affected.setHp(affected.getHp-poisonDamage)
+    }
+    //paralize effect will be handled by turnscheduler
+  }
 }

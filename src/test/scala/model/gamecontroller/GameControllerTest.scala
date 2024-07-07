@@ -4,7 +4,7 @@ import model.armory.{Staff, Sword}
 import model.character.Enemy
 import model.character.specializations.{Paladin, Warrior, WhiteMage}
 import model.sorcery.{Fire, Poison}
-import model.state.{GameController, InGame, PreGame}
+import model.state.{EndGame, GameController, InGame, PreGame}
 import munit.FunSuite
 
 import scala.collection.mutable.ArrayBuffer
@@ -46,7 +46,7 @@ class GameControllerTest extends FunSuite{
     gameController.playerEquipWeapon(mage, staff)
     gameController.turnScheduler.enqueueCharacters()
     gameController.turnScheduler.updateCharacterActionBar(30)
-    gameController.turnScheduler.setTurnCharacter()
+    gameController.turnScheduler.setTurnCharacter(0)
 
     println(gameController.turnScheduler.fightList)
     println(mage.getMaxActionBar())
@@ -59,12 +59,34 @@ class GameControllerTest extends FunSuite{
     gameController.playerEquipWeapon(paladin, sword)
     gameController.turnScheduler.enqueueCharacters()
     gameController.turnScheduler.updateCharacterActionBar(30)
-    gameController.turnScheduler.setTurnCharacter()
+    gameController.turnScheduler.setTurnCharacter(0)
 
     println(gameController.turnScheduler.fightList)
     println(mage.getMaxActionBar())
     gameController.unitAttack(paladin, enemy)
 
+  }
+  test("A game controller can pass a turn to the next character") {
+    gameController.startGame(ArrayBuffer(mage, paladin, warrior), ArrayBuffer(enemy))
+    gameController.playerEquipWeapon(mage, staff)
+    gameController.turnScheduler.enqueueCharacters()
+    gameController.turnScheduler.updateCharacterActionBar(30)
+    gameController.turnScheduler.setTurnCharacter(0)
+    //turn character = mage
+    gameController.passTurn(gameController.turnScheduler.turnCharacter)
+    //turn character = paladin
+    println(gameController.turnScheduler.fightList)
+
+    assertEquals(gameController.turnScheduler.turnCharacter, paladin)
+  }
+  test("A game controller can end the game when the party is defeated"){
+    gameController.startGame(ArrayBuffer(mage, paladin, warrior), ArrayBuffer(enemy))
+    //Every party member will die
+    for (partymember <-gameController.party.currentParty){
+      partymember.setHp(0)
+    }
+    gameController.endGame()
+    assert(gameController.state.isInstanceOf[EndGame])
   }
 
 }

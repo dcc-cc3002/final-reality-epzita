@@ -107,9 +107,9 @@ abstract class ATurnScheduler extends ITurnScheduler {
    * Sets the character currently taking their turn to the first character in the fight list.
    * Prints a message if the fight list is empty.
    */
-  def setTurnCharacter(): Unit = {
+  def setTurnCharacter(index: Int): Unit = {
     if (this.fightList.nonEmpty) {
-      this.turnCharacter = this.fightList(0)
+      this.turnCharacter = this.fightList(index)
     } else {
       println("This turn has not yet started")
     }
