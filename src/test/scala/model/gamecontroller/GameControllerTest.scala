@@ -21,7 +21,7 @@ class GameControllerTest extends FunSuite{
 
   override def beforeEach(context: BeforeEach): Unit = {
     gameController = new GameController()
-    warrior = new Warrior("Warrior", 10, 10 ,25)
+    warrior = new Warrior("Warrior", 10, 10 ,28)
     paladin = new Paladin("Paladin", 10 , 10, 18)
     mage = new WhiteMage("Mage", 10, 10,10,50)
     enemy = new Enemy("Enemy", 10, 10 ,10, 30)
@@ -42,7 +42,7 @@ class GameControllerTest extends FunSuite{
     gameController.playerEquipWeapon(warrior, sword)
   }
   test("A game controller can make a mage cast a spell"){
-    gameController.startGame(ArrayBuffer(mage, paladin), ArrayBuffer(enemy))
+    gameController.startGame(ArrayBuffer(mage, paladin,warrior), ArrayBuffer(enemy))
     gameController.playerEquipWeapon(mage, staff)
     gameController.turnScheduler.enqueueCharacters()
     gameController.turnScheduler.updateCharacterActionBar(30)
