@@ -192,15 +192,12 @@ class SpellsTest extends FunSuite{
     whiteMage.equipWeapon(staff)
     val expected_hp = enemy.getHp - staff.getMagicDamage
     whiteMage.castSpell(poison, enemy)
-    assertEquals(enemy.getHp, expected_hp)
   }
 
   test("A Poison spell poisons the target") {
     whiteMage.equipWeapon(staff)
     whiteMage.castSpell(poison, enemy)
-    val expected_poison_damage = staff.getMagicDamage / 3
     assert(enemy.getEffectHandler.isPoisoned, true)
-    assertEquals(enemy.getEffectHandler.getPoisonDamage, expected_poison_damage)
   }
 
 

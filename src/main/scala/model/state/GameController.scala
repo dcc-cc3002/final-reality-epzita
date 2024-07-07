@@ -21,8 +21,7 @@ class GameController {
      for(player<-players){
        party.addMember(player)
      }
-
-  gameCharacters++= players
+     gameCharacters++= players
      gameCharacters++= enemies
      for(character <- gameCharacters){
        turnScheduler.addNewCharacter(character)

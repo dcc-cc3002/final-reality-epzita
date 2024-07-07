@@ -16,12 +16,9 @@ class Poison(override val manaCost: Int = 30) extends LightSpell with DamageSpel
     if (caster.hasWeapon) {
       if(caster.getWeapon.get.hasMagicDamage){
         val damage = caster.getWeapon.get.getMagicDamage
-        target.setHp(target.getHp - damage)
-        val probability = Random.between(1, 101)
-        if (probability >= 80) {
-          target.getEffectHandler.setPoisonTurnsLeft(4)
-          target.getEffectHandler.setPoisonDamage(damage/3)
-        }
+        target.getEffectHandler.setPoisonTurnsLeft(4)
+        target.getEffectHandler.setPoisonDamage(damage/3)
+
       }
       else{
         throw new InvalidWeaponException("A Mage needs a to equip Magic Weapon to cast a spell")
