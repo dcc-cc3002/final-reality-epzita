@@ -14,8 +14,7 @@ class Paralize(override val manaCost: Int = 25) extends LightSpell with DamageSp
     }
     if (caster.hasWeapon) {
       if (caster.getWeapon.get.hasMagicDamage) {
-        val damage = caster.getWeapon.get.getMagicDamage
-        target.setHp(target.getHp - damage)
+        target.getEffectHandler.setParalizedTurnsLeft(1)
       }
       else {
         throw new InvalidWeaponException("A Mage needs a to equip Magic Weapon to cast a spell")

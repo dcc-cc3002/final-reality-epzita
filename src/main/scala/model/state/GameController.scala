@@ -54,7 +54,7 @@ class GameController {
     }
     turnScheduler.setTurnCharacter()
   }
-  def playerEquipWeapon(player: Character, weapon: Weapon) = player.equipWeapon(weapon)
+  def playerEquipWeapon(player: Character, weapon: Weapon): Unit = player.equipWeapon(weapon)
 
   def win: Boolean = enemies.length == 0
 
