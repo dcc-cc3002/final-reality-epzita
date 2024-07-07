@@ -14,7 +14,7 @@ class GameController {
   var state: GameState = new PreGame(this)
   val gameCharacters = new ArrayBuffer[GameUnit]
   val turnScheduler = new TurnScheduler
-  val enemies = new ArrayBuffer[Enemy]
+  val enemy_party = new ArrayBuffer[Enemy]
   val party = new Party()
 
   def startGame(players: ArrayBuffer[Character], enemies: ArrayBuffer[Enemy]): Unit = {
@@ -23,6 +23,7 @@ class GameController {
      }
      gameCharacters++= players
      gameCharacters++= enemies
+     enemy_party ++= enemies
      for(character <- gameCharacters){
        turnScheduler.addNewCharacter(character)
      }
@@ -56,13 +57,26 @@ class GameController {
   }
   def playerEquipWeapon(player: Character, weapon: Weapon): Unit = player.equipWeapon(weapon)
 
-  def win: Boolean = enemies.length == 0
+  def isEnemyDefeated: Boolean ={
+    var total_hp = 0
+    for(enemy <- enemy_party){
+      total_hp += enemy.getHp
+    }
+    total_hp == 0
+  }
+
+  def win: Boolean = isEnemyDefeated
 
   def lose: Boolean = party.isDefeated
 
   def endGame(): Unit ={
-    if(win || lose){
+    if(win){
       state = new EndGame(this)
+      println("Heroes have won!")
+    }
+    if(lose){
+      state = new EndGame(this)
+      println("Heroes have been defeated!...")
     }
   }
 

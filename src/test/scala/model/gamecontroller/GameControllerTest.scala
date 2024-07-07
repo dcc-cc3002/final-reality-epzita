@@ -48,8 +48,7 @@ class GameControllerTest extends FunSuite{
     gameController.turnScheduler.updateCharacterActionBar(30)
     gameController.turnScheduler.setTurnCharacter(0)
 
-    println(gameController.turnScheduler.fightList)
-    println(mage.getMaxActionBar())
+    
     gameController.mageCast(poison, mage, enemy)
 
   }
@@ -61,8 +60,6 @@ class GameControllerTest extends FunSuite{
     gameController.turnScheduler.updateCharacterActionBar(30)
     gameController.turnScheduler.setTurnCharacter(0)
 
-    println(gameController.turnScheduler.fightList)
-    println(mage.getMaxActionBar())
     gameController.unitAttack(paladin, enemy)
 
   }
@@ -75,16 +72,24 @@ class GameControllerTest extends FunSuite{
     //turn character = mage
     gameController.passTurn(gameController.turnScheduler.turnCharacter)
     //turn character = paladin
-    println(gameController.turnScheduler.fightList)
+
 
     assertEquals(gameController.turnScheduler.turnCharacter, paladin)
   }
+
   test("A game controller can end the game when the party is defeated"){
     gameController.startGame(ArrayBuffer(mage, paladin, warrior), ArrayBuffer(enemy))
     //Every party member will die
     for (partymember <-gameController.party.currentParty){
       partymember.setHp(0)
     }
+    gameController.endGame()
+    assert(gameController.state.isInstanceOf[EndGame])
+  }
+
+  test("A game controller can end the game when the enemies have been defeated"){
+    gameController.startGame(ArrayBuffer(mage, paladin, warrior), ArrayBuffer(enemy))
+    enemy.setHp(0)
     gameController.endGame()
     assert(gameController.state.isInstanceOf[EndGame])
   }
