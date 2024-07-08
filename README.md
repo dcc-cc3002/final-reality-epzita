@@ -9,7 +9,8 @@ This game currently has the core elements of an RPG game, with 5 different chara
 
 As an RPG game, you can gather your party and fight your enemies in a turn-based combat implemented by a Turn Scheduler.
 
-This project is currently in WIP.
+The flow diagram of the game is the following:
 
+![Diagrama de estados](docs/diagrama.png)
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
