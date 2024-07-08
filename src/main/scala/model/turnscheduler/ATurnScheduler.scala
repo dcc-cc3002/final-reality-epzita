@@ -109,9 +109,36 @@ abstract class ATurnScheduler extends ITurnScheduler {
    */
   def setTurnCharacter(index: Int): Unit = {
     if (this.fightList.nonEmpty) {
-      this.turnCharacter = this.fightList(index)
+      if(index <= fightList.length){
+        this.turnCharacter = this.fightList(index)
+        //when the turn is given, the units receives the effects from a spell if necessary
+        //first damage related effects are aplied, then, if paralized the turn is skipped
+        turnCharacter.getEffectHandler.applyEfects()
+        if (turnCharacter.getEffectHandler.isParalized) {
+          if(index+1 <= fightList.length){
+            setTurnCharacter(index + 1)
+          }
+          else{
+            //the turn is finished, everyone comes back to the waitlist
+            newTurn()
+          }
+        }
+      }
+      else{
+        //the turn is finished, everyone comes back to the waitlist
+        newTurn()
+      }
     } else {
       println("This turn has not yet started")
     }
+  }
+  def newTurn(): Unit = {
+    for(fighters <- fightingCharacters){
+      if(fighters.getHp == 0){
+        fightingCharacters -= fighters
+      }
+    }
+    resetCharacterActionBar(fightingCharacters)
+    enqueueCharacters()
   }
 }

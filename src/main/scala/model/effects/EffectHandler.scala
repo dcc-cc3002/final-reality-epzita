@@ -34,7 +34,7 @@ class EffectHandler(affected: GameUnit) {
    * @param turns The new number of turns left for the poison effect.
    */
   def setPoisonTurnsLeft(turns: Int): Unit = {
-    poisonTurnsLeft = turns
+    poisonTurnsLeft = math.max(0, turns)
   }
 
   /**
@@ -71,7 +71,7 @@ class EffectHandler(affected: GameUnit) {
    * @param turns The new number of turns left for the burn effect.
    */
   def setBurnedTurnsLeft(turns: Int): Unit = {
-    burnedTurnsLeft = turns
+    burnedTurnsLeft = math.max(turns, 0)
   }
 
   /**
@@ -108,7 +108,7 @@ class EffectHandler(affected: GameUnit) {
    * @param turns The new number of turns left for the paralysis effect.
    */
   def setParalizedTurnsLeft(turns: Int): Unit = {
-    paralizedTurnsLeft = turns
+    paralizedTurnsLeft = math.max(0,turns)
   }
 
   /**
@@ -120,9 +120,11 @@ class EffectHandler(affected: GameUnit) {
   def applyEfects(): Unit = {
     if(isBurned){
       affected.setHp(affected.getHp-burnDamage)
+      setBurnedTurnsLeft(getBurnedTurnsLeft-1)
     }
     if(isPoisoned){
       affected.setHp(affected.getHp-poisonDamage)
+      setPoisonDamage(getPoisonTurnsLeft - 1)
     }
     //paralize effect will be handled by turnscheduler
   }
