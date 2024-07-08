@@ -10,23 +10,32 @@ import model.character.{ACharacter, AMagicCharacter, Character}
  * This class extends Weapon and adds a magic damage parameter to the weapon.
  */
 abstract class MagicWeapon extends Weapon with IMagicWeapon {
+
   /** The name of the weapon. */
   val name: String
+
   /** The base damage inflicted by the weapon. */
   protected var damage: Int
-  /** A weapon cannot be initialized with negative damage */
+
+  // Ensures damage cannot be initialized with a negative value
   protected var _damage: Int = Require.Stat(damage, "damage") atLeast(0)
+
   /** The magic damage inflicted by the weapon. */
   protected var magicDamage: Int
-  /** A weapon cannot be initialized with negative magic damage */
+
+  // Ensures magicDamage cannot be initialized with a negative value
   protected var _magicDamage: Int = Require.Stat(magicDamage, "magicDamage") atLeast(0)
+
   /** The defense power of the weapon. */
   protected val defense: Int
-  /** A weapon cannot be initialized with defense */
+
+  // Ensures defense cannot be initialized with a negative value
   protected var _defense: Int = Require.Stat(defense, "defense") atLeast(0)
+
   /** The weight of the weapon. */
   val weight: Int
-  /** A weapon cannot be initialized with negative weight */
+
+  // Ensures weight cannot be initialized with a negative value
   protected var _weight: Int = Require.Stat(weight, "weight") atLeast(0)
 
   /** The character who currently owns the weapon. */
@@ -65,9 +74,14 @@ abstract class MagicWeapon extends Weapon with IMagicWeapon {
    * @param num The amount by which to increase the magic damage.
    */
   def setMagicDamage(num: Int): Unit = {
-    this.magicDamage = this.magicDamage + num
+    this.magicDamage += num
   }
 
+  /**
+   * Checks if the weapon has magic damage capabilities.
+   *
+   * @return True, as this is a magic weapon.
+   */
   def hasMagicDamage: Boolean = true
 
   /**
@@ -77,6 +91,10 @@ abstract class MagicWeapon extends Weapon with IMagicWeapon {
     setMagicDamage(2)
   }
 
+  /**
+   * Placeholder method for setting the owner of the weapon to a specific type of character.
+   * Implementation should be provided in concrete classes.
+   */
   def setOwner(warrior: Warrior): Unit
 
   def setOwner(paladin: Paladin): Unit
@@ -94,3 +112,4 @@ abstract class MagicWeapon extends Weapon with IMagicWeapon {
     this.owner = None
   }
 }
+

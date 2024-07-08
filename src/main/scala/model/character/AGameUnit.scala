@@ -1,33 +1,41 @@
 package model.character
 
-abstract class AGameUnit extends GameUnit{
+/**
+ * Abstract class representing a game unit in a role-playing game.
+ *
+ * This class provides a base structure for both enemies and characters, defining common attributes and behaviors.
+ */
+abstract class AGameUnit extends GameUnit {
 
-  /** The name of the enemy. */
+  /** The name of the game unit. */
   val name: String
-  /** The current hit points of the enemy. */
+
+  /** The current hit points of the game unit. */
   protected var hp: Int
 
-  /** The defense power of the enemy. */
+  /** The defense power of the game unit. */
   protected var defense: Int
-  /** The weight of the enemy, used for determining the maximum action bar value. */
+
+  /** The weight of the game unit, used for determining the maximum action bar value. */
   val weight: Int
 
-  /** The maximum value of the action bar for the enemy, based on its weight. */
+  /** The maximum value of the action bar for the game unit, based on its weight. */
   protected var maxActionBar: Int = weight
-  /** The current value of the action bar for the enemy. */
+
+  /** The current value of the action bar for the game unit. */
   protected var actionBar = 0
 
   /**
-   * Returns the current hit points of the enemy.
+   * Returns the current hit points of the game unit.
    *
-   * @return The current hit points of the enemy.
+   * @return The current hit points of the game unit.
    */
   override def getHp: Int = {
     this.hp
   }
 
   /**
-   * Sets the hit points of the enemy to the given value.
+   * Sets the hit points of the game unit to the given value.
    *
    * @param hp The new hit points value.
    */
@@ -35,29 +43,51 @@ abstract class AGameUnit extends GameUnit{
     this.hp = hp
   }
 
+  /**
+   * Returns the defense power of the game unit.
+   *
+   * @return The defense power of the game unit.
+   */
   override def getDefense: Int = {
     this.defense
   }
 
-  override def getMaxActionBar(): Int = this.maxActionBar
   /**
-   * Sets the maximum value of the action bar for the enemy based on its weight.
+   * Returns the maximum value of the action bar for the game unit.
+   *
+   * @return The maximum value of the action bar for the game unit.
+   */
+  override def getMaxActionBar(): Int = this.maxActionBar
+
+  /**
+   * Sets the maximum value of the action bar for the game unit based on its weight.
    */
   def setMaxActionBar(): Unit = {
     this.actionBar = this.weight
   }
 
+  /**
+   * Returns the current value of the action bar for the game unit.
+   *
+   * @return The current value of the action bar for the game unit.
+   */
   override def getActionBar(): Int = this.actionBar
 
+  /**
+   * Sets the current value of the action bar for the game unit.
+   *
+   * @param actionBar The new value of the action bar.
+   */
   override def setActionBar(actionBar: Int): Unit = {
     this.actionBar = actionBar
   }
 
   /**
-   * Attacks the given character, reducing their hit points based on the enemy's attack and the character's defense.
+   * Abstract method for attacking another game unit.
    *
-   * @param target The character to attack.
+   * @param target The game unit to attack.
    */
   def attack(target: GameUnit): Unit
 
 }
+

@@ -113,8 +113,8 @@ abstract class ATurnScheduler extends ITurnScheduler {
         this.turnCharacter = this.fightList(index)
         //when the turn is given, the units receives the effects from a spell if necessary
         //first damage related effects are aplied, then, if paralized the turn is skipped
-        turnCharacter.getEffectHandler.applyEfects()
-        if (turnCharacter.getEffectHandler.isParalized) {
+        turnCharacter.getEffectHandler.applyEffects()
+        if (turnCharacter.getEffectHandler.isParalyzed) {
           if(index+1 <= fightList.length){
             setTurnCharacter(index + 1)
           }

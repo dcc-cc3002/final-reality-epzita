@@ -7,22 +7,29 @@ import model.character.specializations.{BlackMage, Ninja, Paladin, Warrior, Whit
 /**
  * Abstract class defining a physical weapon.
  *
- * This class helps create only physical type weapons.
+ * This class represents weapons that deal physical damage and have defense and weight attributes.
  */
 abstract class PhysicalWeapon extends Weapon {
+
   /** The name of the weapon. */
   val name: String
+
   /** The base damage inflicted by the weapon. */
   protected var damage: Int
-  /** A weapon cannot be initialized with negative damage */
+
+  // Ensures damage cannot be initialized with a negative value
   protected var _damage: Int = Require.Stat(damage, "damage") atLeast(0)
+
   /** The defense power of the weapon. */
   protected val defense: Int
-  /** A weapon cannot be initialized with negative defense */
+
+  // Ensures defense cannot be initialized with a negative value
   protected var _defense: Int = Require.Stat(defense, "defense") atLeast(0)
+
   /** The weight of the weapon. */
   val weight: Int
-  /** A weapon cannot be initialized with negative weight */
+
+  // Ensures weight cannot be initialized with a negative value
   protected var _weight: Int = Require.Stat(weight, "weight") atLeast(0)
 
   /** The character who currently owns the weapon. */
@@ -52,9 +59,14 @@ abstract class PhysicalWeapon extends Weapon {
    * @param num The amount by which to increase the damage.
    */
   def setDamage(num: Int): Unit = {
-    this.damage = this.damage + num
+    this.damage += num
   }
 
+  /**
+   * Checks if the weapon has magic damage.
+   *
+   * @return False, as this is a physical weapon.
+   */
   def hasMagicDamage: Boolean = false
 
   /**
@@ -64,6 +76,17 @@ abstract class PhysicalWeapon extends Weapon {
     damage += 2
   }
 
+  /**
+   * Leaves the current owner of the weapon, making it available for another character to equip.
+   */
+  def leaveOwner(): Unit = {
+    this.owner = None
+  }
+
+  /**
+   * Placeholder method for setting the owner of the weapon to a specific type of character.
+   * Implementation should be provided in concrete classes.
+   */
   def setOwner(warrior: Warrior): Unit
 
   def setOwner(paladin: Paladin): Unit
@@ -73,13 +96,14 @@ abstract class PhysicalWeapon extends Weapon {
   def setOwner(blackMage: BlackMage): Unit
 
   def setOwner(whiteMage: WhiteMage): Unit
+
   /**
-   * Leaves the current owner of the weapon, making it available for another character to equip.
+   * Returns the amount of magic damage inflicted by the weapon.
+   *
+   * @return The magic damage inflicted by the weapon (always 0 for a physical weapon).
    */
-  def leaveOwner(): Unit = {
-    this.owner = None
-  }
   def getMagicDamage: Int = {
     0
   }
 }
+

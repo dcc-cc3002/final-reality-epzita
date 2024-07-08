@@ -3,7 +3,7 @@ package model.effects
 import model.character.{Enemy, GameUnit}
 
 /**
- * Class handling the detrimental effects on characters during combat
+ * Class handling detrimental effects on characters during combat.
  *
  * This class manages effects such as poison, burn, and paralysis, tracking their duration and damage.
  *
@@ -15,7 +15,7 @@ class EffectHandler(affected: GameUnit) {
   /** The number of turns left for the burn effect. */
   private var burnedTurnsLeft: Int = 0
   /** The number of turns left for the paralysis effect. */
-  private var paralizedTurnsLeft: Int = 0
+  private var paralyzedTurnsLeft: Int = 0
   /** The damage inflicted per turn by the burn effect. */
   private var burnDamage: Int = 0
   /** The damage inflicted per turn by the poison effect. */
@@ -49,14 +49,16 @@ class EffectHandler(affected: GameUnit) {
    *
    * @param damage The new poison damage per turn.
    */
-  def setPoisonDamage(damage: Int): Unit = poisonDamage = damage
+  def setPoisonDamage(damage: Int): Unit = {
+    poisonDamage = damage
+  }
 
   /**
    * Checks if the character is currently poisoned.
    *
    * @return true if the character is poisoned, false otherwise.
    */
-  def isPoisoned: Boolean = getPoisonTurnsLeft > 0
+  def isPoisoned: Boolean = poisonTurnsLeft > 0
 
   /**
    * Returns the number of turns left for the burn effect.
@@ -86,29 +88,31 @@ class EffectHandler(affected: GameUnit) {
    *
    * @param damage The new burn damage per turn.
    */
-  def setBurnDamage(damage: Int): Unit = burnDamage = damage
+  def setBurnDamage(damage: Int): Unit = {
+    burnDamage = damage
+  }
 
   /**
    * Checks if the character is currently burned.
    *
    * @return true if the character is burned, false otherwise.
    */
-  def isBurned: Boolean = getBurnedTurnsLeft > 0
+  def isBurned: Boolean = burnedTurnsLeft > 0
 
   /**
    * Returns the number of turns left for the paralysis effect.
    *
    * @return The number of turns left for the paralysis effect.
    */
-  def getParalizedTurnsLeft: Int = paralizedTurnsLeft
+  def getParalyzedTurnsLeft: Int = paralyzedTurnsLeft
 
   /**
    * Sets the number of turns left for the paralysis effect.
    *
    * @param turns The new number of turns left for the paralysis effect.
    */
-  def setParalizedTurnsLeft(turns: Int): Unit = {
-    paralizedTurnsLeft = math.max(0,turns)
+  def setParalyzedTurnsLeft(turns: Int): Unit = {
+    paralyzedTurnsLeft = math.max(0, turns)
   }
 
   /**
@@ -116,16 +120,22 @@ class EffectHandler(affected: GameUnit) {
    *
    * @return true if the character is paralyzed, false otherwise.
    */
-  def isParalized: Boolean = getParalizedTurnsLeft > 0
-  def applyEfects(): Unit = {
-    if(isBurned){
-      affected.setHp(affected.getHp-burnDamage)
-      setBurnedTurnsLeft(getBurnedTurnsLeft-1)
+  def isParalyzed: Boolean = paralyzedTurnsLeft > 0
+
+  /**
+   * Applies the effects of burn and poison on the affected game unit.
+   * This method should be called at the start of each turn during combat.
+   */
+  def applyEffects(): Unit = {
+    if (isBurned) {
+      affected.setHp(affected.getHp - burnDamage)
+      setBurnedTurnsLeft(burnedTurnsLeft - 1)
     }
-    if(isPoisoned){
-      affected.setHp(affected.getHp-poisonDamage)
-      setPoisonDamage(getPoisonTurnsLeft - 1)
+    if (isPoisoned) {
+      affected.setHp(affected.getHp - poisonDamage)
+      setPoisonTurnsLeft(poisonTurnsLeft - 1)
     }
-    //paralize effect will be handled by turnscheduler
+    // Paralysis effect handling should be done by the turn scheduler or elsewhere.
   }
 }
+

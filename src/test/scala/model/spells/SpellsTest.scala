@@ -157,7 +157,7 @@ class SpellsTest extends FunSuite{
   test("A Paralize spell can be casted by a White Mage with a Weapon equipped") {
     whiteMage.equipWeapon(staff)
     whiteMage.castSpell(paralize, enemy)
-    assert(enemy.getEffectHandler.isParalized, true)
+    assert(enemy.getEffectHandler.isParalyzed, true)
   }
 
   test("A Paralize spell cannot be casted by a White Mage without enough mana") {

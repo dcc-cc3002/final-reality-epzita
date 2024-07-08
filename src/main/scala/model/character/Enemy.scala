@@ -12,9 +12,16 @@ import model.effects.EffectHandler
  * @param weight weight, helps determine position during combat turns
  */
 class Enemy(val name: String, protected var hp: Int,
-  var attack: Int, protected var defense: Int,
-  val weight: Int)  extends AEnemy{
+            var attack: Int, protected var defense: Int,
+            val weight: Int)  extends AEnemy {
 
+  /**
+   * Overrides the attack method to allow the enemy to attack a GameUnit.
+   * If the target can be attacked by this enemy, calculates damage and reduces target's HP.
+   * Throws an exception if the target cannot be attacked by an enemy.
+   *
+   * @param target The GameUnit to attack.
+   */
   override def attack(target: GameUnit) = {
     if (target.canBeAttackedBy(this)) {
       val damage = this.attack - target.getDefense
@@ -25,7 +32,14 @@ class Enemy(val name: String, protected var hp: Int,
     }
   }
 
+  /** Instance of EffectHandler for managing effects on this enemy. */
   val effectHandler: EffectHandler = new EffectHandler(this)
 
+  /**
+   * Returns the EffectHandler instance associated with this enemy.
+   *
+   * @return The EffectHandler instance.
+   */
   override def getEffectHandler: EffectHandler = this.effectHandler
 }
+

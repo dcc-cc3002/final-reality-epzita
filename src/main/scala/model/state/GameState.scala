@@ -1,12 +1,15 @@
 package model.state
 
-class GameState(val context: GameController){
-  var inPreGame:    Boolean = false
-  var inGame:       Boolean = false
-  var inCombat: Boolean = false
-  var inEndGame:    Boolean = false
-
-  def error(): Unit = throw new Exception("This action cannot be triggered in this state")
-  def setState(state: GameState): Unit = context.state = state
+/**
+ * Class representing the state of the game.
+ *
+ * @param context The game controller managing the game state.
+ */
+class GameState(val context: GameController) {
+  var inPreGame: Boolean = false   // Indicates if the game is in the pre-game phase.
+  var inGame: Boolean = false      // Indicates if the game is currently running.
+  var inCombat: Boolean = false    // Indicates if the game is in combat mode.
+  var inEndGame: Boolean = false   // Indicates if the game has ended.
 
 }
+

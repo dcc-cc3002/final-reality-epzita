@@ -22,7 +22,6 @@ abstract class AMagicCharacter extends ACharacter with MagicCharacter {
   /** The current mana points of the character. */
   var mp: Int
 
-
   /**
    * Returns the current mana points of the character.
    *
@@ -31,23 +30,36 @@ abstract class AMagicCharacter extends ACharacter with MagicCharacter {
   def getMp: Int = {
     this.mp
   }
+
+  /**
+   * Sets the mana points of the character to the given value.
+   *
+   * @param newMana The new mana points value.
+   */
   def setMp(newMana: Int): Unit = {
     this.mp = newMana
   }
 
+  /**
+   * Casts a spell on a target GameUnit.
+   *
+   * Checks if the spell can be cast by this character, verifies if the character has enough mana to cast the spell,
+   * and deducts the mana cost from the character's mana points upon casting.
+   *
+   * @param spell The spell to cast.
+   * @param target The target GameUnit to cast the spell on.
+   */
   def castSpell(spell: Spell, target: GameUnit): Unit = {
-
-    if(spell.canBeCastBy(this)){
-      if(this.getMp >= spell.manaCost){
+    if (spell.canBeCastBy(this)) {
+      if (this.getMp >= spell.manaCost) {
         spell.cast(this, target)
         this.setMp(this.getMp - spell.manaCost)
-      }
-      else{
+      } else {
         throw new InsufficientManaException("This Mage doesn't have enough mana to cast this Spell")
       }
-    }
-    else{
+    } else {
       throw new InvalidSpellException("This Mage can't cast this kind of Magic")
     }
   }
 }
+
